@@ -1,0 +1,2734 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>GIZ Maroc — CGLU Tanger 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Outfit:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+  :root{--giz-red:#e2001a;--giz-dark:#1a1a2e;--ink:#13131f;--paper:#f4f1ea;--paper2:#ebe6db;
+    --eco:#2d6a4f;--econ:#bc6c25;--serv:#1d4e89;--line:rgba(19,19,31,.12);
+    --shadow:0 20px 60px -15px rgba(19,19,31,.25);--font-display:'Fraunces',serif;
+    --font-body:'Outfit',sans-serif;--ease:cubic-bezier(.16,1,.3,1);}
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;overflow:hidden;}
+  body{font-family:var(--font-body);background:var(--paper);color:var(--ink);user-select:none;
+    -webkit-user-select:none;cursor:default;position:relative;}
+  body.rtl{direction:rtl;font-family:'IBM Plex Sans Arabic',sans-serif;}
+  body.rtl .display{font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700;}
+  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:radial-gradient(circle at 15% 20%,rgba(45,106,79,.06),transparent 40%),
+               radial-gradient(circle at 85% 75%,rgba(29,78,137,.06),transparent 40%);}
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .display{font-family:var(--font-display);}
+  #app{position:relative;z-index:2;height:100vh;display:flex;flex-direction:column;}
+  header{display:flex;align-items:center;justify-content:space-between;padding:28px 48px;
+    border-bottom:1px solid var(--line);background:rgba(244,241,234,.7);backdrop-filter:blur(8px);
+    flex-shrink:0;z-index:10;}
+  .brand{display:flex;align-items:center;gap:18px;}
+  .brand-mark{width:54px;height:54px;border-radius:14px;background:var(--giz-red);display:grid;
+    place-items:center;color:#fff;font-family:var(--font-display);font-weight:900;font-size:22px;
+    box-shadow:0 8px 20px -6px rgba(226,0,26,.5);}
+  .brand-txt h1{font-size:19px;font-weight:700;letter-spacing:-.01em;line-height:1.1;}
+  .brand-txt p{font-size:12px;opacity:.55;font-weight:500;letter-spacing:.04em;text-transform:uppercase;}
+  .lang-switch{display:flex;gap:6px;background:var(--paper2);padding:5px;border-radius:14px;}
+  .lang-switch button{border:none;background:transparent;font-family:var(--font-body);font-size:15px;
+    font-weight:600;padding:10px 18px;border-radius:10px;cursor:pointer;color:var(--ink);opacity:.5;
+    transition:all .3s var(--ease);min-width:58px;}
+  .lang-switch button.active{background:#fff;opacity:1;box-shadow:0 4px 12px -4px rgba(0,0,0,.15);}
+  .crumbs{display:flex;align-items:center;gap:12px;padding:18px 48px;flex-shrink:0;font-size:14px;
+    font-weight:500;min-height:58px;flex-wrap:wrap;}
+  .crumbs button{border:none;background:transparent;font-family:var(--font-body);font-size:14px;
+    font-weight:600;color:var(--giz-red);cursor:pointer;display:flex;align-items:center;gap:8px;}
+  .crumbs .sep{opacity:.3;}.crumbs .current{opacity:.6;}.crumbs .back-arrow{font-size:18px;}
+  body.rtl .crumbs .back-arrow{transform:scaleX(-1);}
+  main{flex:1;overflow:hidden;position:relative;}
+  .screen{position:absolute;inset:0;overflow-y:auto;padding:10px 48px 48px;opacity:0;
+    transform:translateY(24px);pointer-events:none;transition:opacity .5s var(--ease),transform .5s var(--ease);}
+  .screen.active{opacity:1;transform:none;pointer-events:auto;}
+  .screen::-webkit-scrollbar{width:0;}
+  .home-intro{max-width:840px;margin-bottom:44px;}
+  .home-intro .kicker{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--giz-red);margin-bottom:18px;}
+  .home-intro h2{font-family:var(--font-display);font-size:clamp(38px,5vw,62px);font-weight:600;
+    line-height:1.02;letter-spacing:-.02em;margin-bottom:20px;}
+  .home-intro p{font-size:19px;line-height:1.6;opacity:.7;font-weight:300;max-width:660px;}
+  .axes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .axis-card{position:relative;border-radius:24px;padding:38px;cursor:pointer;overflow:hidden;
+    background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .4s var(--ease);
+    min-height:340px;display:flex;flex-direction:column;justify-content:space-between;}
+  .axis-card:active{transform:scale(.97);}
+  .axis-card .axis-num{font-family:var(--font-display);font-size:15px;font-weight:600;opacity:.4;}
+  .axis-card .axis-bar{height:6px;width:64px;border-radius:3px;margin:22px 0;}
+  .axis-card h3{font-family:var(--font-display);font-size:28px;font-weight:600;line-height:1.1;
+    letter-spacing:-.01em;margin-bottom:14px;}
+  .axis-card .axis-foot{display:flex;align-items:center;justify-content:space-between;margin-top:28px;}
+  .axis-card .axis-count{font-size:13px;font-weight:600;opacity:.5;letter-spacing:.03em;text-transform:uppercase;}
+  .axis-card .axis-go{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:#fff;
+    font-size:22px;transition:transform .3s var(--ease);}
+  body.rtl .axis-go{transform:scaleX(-1);}
+  .axis-card:active .axis-go{transform:translateX(4px);}
+  .axis-card .glow{position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;
+    filter:blur(50px);opacity:.18;}
+  body.rtl .axis-card .glow{right:auto;left:-60px;}
+  .axis-card[data-theme="econ"] .axis-bar,.axis-card[data-theme="econ"] .axis-go,.axis-card[data-theme="econ"] .glow{background:var(--econ);}
+  .axis-card[data-theme="eco"] .axis-bar,.axis-card[data-theme="eco"] .axis-go,.axis-card[data-theme="eco"] .glow{background:var(--eco);}
+  .axis-card[data-theme="serv"] .axis-bar,.axis-card[data-theme="serv"] .axis-go,.axis-card[data-theme="serv"] .glow{background:var(--serv);}
+  .axis-card[data-theme="econ"]{border-top:5px solid var(--econ);}
+  .axis-card[data-theme="eco"]{border-top:5px solid var(--eco);}
+  .axis-card[data-theme="serv"]{border-top:5px solid var(--serv);}
+  .section-head{margin-bottom:36px;max-width:840px;}
+  .section-head .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;padding:7px 14px;border-radius:20px;color:#fff;margin-bottom:18px;}
+  .section-head h2{font-family:var(--font-display);font-size:clamp(28px,4vw,44px);font-weight:600;
+    line-height:1.05;letter-spacing:-.02em;}
+  .section-head p{font-size:17px;line-height:1.55;opacity:.65;font-weight:300;margin-top:14px;}
+  .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  .project-card{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;cursor:pointer;
+    box-shadow:0 6px 24px -12px rgba(19,19,31,.18);transition:transform .35s var(--ease);
+    display:flex;flex-direction:column;}
+  .project-card:active{transform:scale(.98);}
+  .project-card .pimg{height:150px;background-size:cover;background-position:center;position:relative;
+    background-color:var(--paper2);display:grid;place-items:center;}
+  .project-card .pimg .ph{font-size:12px;font-weight:600;opacity:.4;letter-spacing:.05em;text-transform:uppercase;}
+  .project-card .pimg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.30),transparent 60%);}
+  .project-card .pbody{padding:24px;flex:1;display:flex;flex-direction:column;}
+  .project-card h3{font-family:var(--font-display);font-size:22px;font-weight:600;line-height:1.15;margin-bottom:10px;}
+  .project-card .pmission{font-size:14px;line-height:1.5;opacity:.65;font-weight:300;margin-bottom:18px;flex:1;}
+  .project-card .pfoot{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--line);}
+  .project-card .pcount{font-size:12px;font-weight:600;opacity:.55;letter-spacing:.03em;text-transform:uppercase;}
+  .project-card .parrow{font-size:20px;color:var(--giz-red);}
+  body.rtl .parrow{transform:scaleX(-1);}
+  .inits{display:flex;flex-direction:column;gap:16px;max-width:980px;}
+  .init-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 28px;cursor:pointer;
+    display:flex;align-items:center;gap:22px;transition:transform .3s var(--ease);
+    box-shadow:0 5px 20px -12px rgba(19,19,31,.18);}
+  .init-card:active{transform:scale(.985);}
+  .init-icon{flex-shrink:0;width:56px;height:56px;border-radius:16px;display:grid;place-items:center;
+    font-size:24px;background:var(--paper2);}
+  .init-info{flex:1;}
+  .init-info .type{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin-bottom:6px;}
+  .init-info h3{font-size:19px;font-weight:600;line-height:1.2;margin-bottom:6px;}
+  .init-info p{font-size:14px;opacity:.6;font-weight:300;line-height:1.45;}
+  .init-arrow{flex-shrink:0;font-size:22px;opacity:.3;}
+  body.rtl .init-arrow{transform:scaleX(-1);}
+  .detail{max-width:1000px;margin:0 auto;}
+  .detail-hero{border-radius:24px;overflow:hidden;position:relative;margin-bottom:32px;min-height:240px;
+    display:flex;align-items:flex-end;padding:40px;color:#fff;box-shadow:var(--shadow);background-color:var(--giz-dark);}
+  .detail-hero .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+  .detail-hero .hero-bg.empty{background:linear-gradient(135deg,#2a2a44,#1a1a2e);}
+  .detail-hero .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.15));}
+  .detail-hero .hero-content{position:relative;z-index:2;}
+  .detail-hero .type-badge{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;padding:7px 14px;border-radius:20px;background:rgba(255,255,255,.2);
+    backdrop-filter:blur(6px);margin-bottom:16px;}
+  .detail-hero h2{font-family:var(--font-display);font-size:clamp(26px,4.5vw,42px);font-weight:600;
+    line-height:1.05;letter-spacing:-.02em;}
+  .detail-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:32px;}
+  .qblock{margin-bottom:28px;}
+  .qblock .qlabel{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:13px;
+    font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--giz-red);margin-bottom:12px;}
+  .qblock .qlabel .dot{width:8px;height:8px;border-radius:50%;background:var(--giz-red);}
+  .qblock p{font-size:17px;line-height:1.65;opacity:.82;font-weight:300;}
+  .declic{border-radius:18px;padding:30px 34px;margin-bottom:28px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow);}
+  .declic.is-num{display:flex;align-items:baseline;gap:18px;}
+  .declic .big{font-family:var(--font-display);font-size:48px;font-weight:600;line-height:1;letter-spacing:-.02em;white-space:nowrap;}
+  .declic .num-lbl{font-size:16px;font-weight:400;opacity:.9;line-height:1.3;}
+  .declic.is-quote .quote{font-family:var(--font-display);font-size:21px;line-height:1.45;font-style:italic;font-weight:400;margin-bottom:14px;}
+  .declic.is-quote .who{font-size:14px;font-weight:600;opacity:.92;}
+  .declic.is-quote .who .role{font-weight:400;opacity:.8;}
+  .declic::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.12);}
+  body.rtl .declic::before{right:auto;left:-40px;}
+  .video-wrap{border-radius:18px;overflow:hidden;background:#000;position:relative;aspect-ratio:16/9;
+    margin-bottom:14px;cursor:pointer;box-shadow:var(--shadow);}
+  .video-wrap .vthumb{position:absolute;inset:0;background-size:cover;background-position:center;background-color:#222;}
+  .video-wrap .vthumb::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.3);}
+  .video-wrap .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:78px;height:78px;
+    border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;z-index:2;box-shadow:0 10px 30px rgba(0,0,0,.4);}
+  .video-wrap .play svg{width:30px;height:30px;margin-left:5px;fill:var(--giz-red);}
+  body.rtl .video-wrap .play svg{margin-left:0;margin-right:5px;}
+  .video-cap{font-size:13px;opacity:.55;font-style:italic;margin-bottom:28px;}
+  .detail-side .fact-box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;
+    box-shadow:0 6px 24px -12px rgba(19,19,31,.18);margin-bottom:20px;}
+  .detail-side h5{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.5;margin-bottom:18px;}
+  .fact-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px;}
+  .fact-row:last-child{border:none;}
+  .fact-row .k{opacity:.6;font-weight:300;flex-shrink:0;}
+  .fact-row .v{font-weight:600;text-align:right;}
+  body.rtl .fact-row .v{text-align:left;}
+  .transpo{background:linear-gradient(135deg,var(--giz-dark),#2a2a44);color:#fff;border-radius:20px;padding:30px;
+    box-shadow:var(--shadow);position:relative;overflow:hidden;}
+  .transpo::before{content:'\21C4';position:absolute;top:18px;right:22px;font-size:60px;opacity:.12;font-weight:700;}
+  body.rtl .transpo::before{right:auto;left:22px;}
+  .transpo .tlabel{font-family:var(--font-display);font-size:13px;font-weight:600;letter-spacing:.06em;
+    text-transform:uppercase;color:#fff;opacity:.7;margin-bottom:12px;}
+  .transpo .ttext{font-size:16px;line-height:1.5;font-weight:300;margin-bottom:22px;}
+  .transpo .cta{display:inline-block;background:var(--giz-red);color:#fff;padding:13px 22px;border-radius:12px;
+    font-weight:600;font-size:14px;margin-bottom:22px;line-height:1.3;}
+  .transpo .contact{display:flex;align-items:center;gap:14px;padding-top:22px;border-top:1px solid rgba(255,255,255,.18);}
+  .transpo .cavatar{width:48px;height:48px;border-radius:50%;background:var(--giz-red);flex-shrink:0;display:grid;
+    place-items:center;font-family:var(--font-display);font-weight:700;font-size:18px;color:#fff;}
+  .transpo .cinfo .cname{font-weight:600;font-size:16px;}
+  .transpo .cinfo .crole{font-size:13px;opacity:.75;margin-bottom:3px;}
+  .transpo .cinfo .cmail{font-size:13px;opacity:.9;color:#fff;text-decoration:none;font-weight:500;word-break:break-all;}
+  .modal{position:fixed;inset:0;z-index:100;background:rgba(10,10,18,.92);backdrop-filter:blur(8px);
+    display:none;align-items:center;justify-content:center;padding:60px;}
+  .modal.open{display:flex;}
+  .modal video{max-width:100%;max-height:100%;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.6);}
+  .modal .close{position:absolute;top:36px;right:36px;width:60px;height:60px;border-radius:50%;
+    background:rgba(255,255,255,.15);border:none;color:#fff;font-size:28px;cursor:pointer;display:grid;place-items:center;}
+  body.rtl .modal .close{right:auto;left:36px;}
+  .modal .placeholder{color:rgba(255,255,255,.7);text-align:center;font-size:18px;max-width:500px;}
+  .modal .placeholder .icn{font-size:60px;margin-bottom:20px;}
+  .idle-hint{position:fixed;bottom:0;left:0;right:0;z-index:50;height:4px;}
+  .idle-hint .fill{height:100%;width:0;background:var(--giz-red);transition:width 1s linear;opacity:.6;}
+  .foot-note{padding:16px 48px;font-size:12px;opacity:.4;text-align:center;flex-shrink:0;border-top:1px solid var(--line);}
+
+  /* acronyme discret */
+  .acr-badge{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;
+    padding:4px 10px;border-radius:12px;background:var(--paper2);color:var(--ink);opacity:.55;margin-bottom:10px;}
+  .detail-hero .acr-badge{background:rgba(255,255,255,.18);color:#fff;opacity:.85;backdrop-filter:blur(6px);}
+  .project-card .pimg .pacr{position:absolute;top:12px;left:12px;z-index:2;font-size:11px;font-weight:600;
+    padding:4px 10px;border-radius:12px;background:rgba(255,255,255,.85);color:var(--ink);letter-spacing:.03em;}
+  body.rtl .project-card .pimg .pacr{left:auto;right:12px;}
+
+  .home-bg{position:fixed;inset:0;z-index:0;overflow:hidden;}
+  .home-bg .slide{position:absolute;inset:0;background-size:cover;background-position:center;
+    opacity:0;transition:opacity 1.6s ease;}
+  .home-bg .slide.active{opacity:1;}
+  .home-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(244,241,234,.92),rgba(244,241,234,.78));}
+  .qr-block{margin-top:40px;background:#fff;border:1px solid var(--line);border-radius:22px;
+    padding:30px 34px;display:flex;align-items:center;gap:28px;box-shadow:0 6px 24px -12px rgba(19,19,31,.18);max-width:620px;}
+  body.rtl .qr-block{flex-direction:row-reverse;}
+  .qr-block .qr-canvas{flex-shrink:0;width:128px;height:128px;border-radius:14px;background:#fff;
+    padding:8px;border:1px solid var(--line);display:grid;place-items:center;}
+  .qr-block .qr-canvas img{width:100%;height:100%;image-rendering:pixelated;}
+  .qr-block .qr-txt h4{font-family:var(--font-display);font-size:21px;font-weight:600;line-height:1.2;margin-bottom:8px;}
+  .qr-block .qr-txt p{font-size:14px;opacity:.6;display:flex;align-items:center;gap:8px;}
+  .qr-block .qr-txt .scan-icn{font-size:18px;}
+  .qr-block.empty{opacity:.55;}
+  .qr-block.empty .qr-canvas{color:var(--ink);opacity:.4;font-size:11px;text-align:center;font-weight:600;}
+  /* maison flottante permanente */
+  .home-fab{position:fixed;z-index:60;bottom:32px;right:32px;width:72px;height:72px;border-radius:50%;
+    background:var(--giz-red);color:#fff;border:none;cursor:pointer;display:none;align-items:center;
+    justify-content:center;box-shadow:0 12px 32px -8px rgba(226,0,26,.6);transition:transform .25s var(--ease);}
+  body.rtl .home-fab{right:auto;left:32px;}
+  .home-fab.show{display:flex;}
+  .home-fab:active{transform:scale(.9);}
+  .home-fab svg{width:34px;height:34px;fill:#fff;}
+  @media(max-width:900px){.axes,.projects,.detail-grid{grid-template-columns:1fr;}
+    header,.crumbs,.screen{padding-left:24px;padding-right:24px;}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="home-bg" id="homeBg"></div>
+<div id="app">
+  <header>
+    <div class="brand"><div class="brand-mark">G</div>
+      <div class="brand-txt"><h1>GIZ Maroc</h1><p data-i18n="congress">CGLU · Tanger 2026</p></div></div>
+    <div class="lang-switch"><button data-lang="fr" class="active">FR</button>
+      <button data-lang="en">EN</button><button data-lang="ar">AR</button></div>
+  </header>
+  <nav class="crumbs" id="crumbs"></nav>
+  <main id="main"></main>
+  <div class="foot-note" data-i18n="footer">Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ) GmbH · Coopération maroco-allemande</div>
+</div>
+<div class="modal" id="videoModal">
+  <button class="close" id="modalClose">×</button>
+  <div class="placeholder" id="videoPlaceholder"><div class="icn">🎬</div>
+    <p data-i18n="videoPlaceholder">Emplacement vidéo, fichier .mp4 local, lecture hors-ligne.</p></div>
+</div>
+<button class="home-fab" id="backFab" aria-label="Précédent">
+  <svg viewBox="0 0 24 24"><path d="M15.5 4l-8 8 8 8 1.8-1.8L11.1 12l6.2-6.2z"/></svg>
+</button>
+<div class="idle-hint"><div class="fill" id="idleFill"></div></div>
+<script>
+//---------------------------------------------------------------------
+//
+// QR Code Generator for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//  http://www.opensource.org/licenses/mit-license.php
+//
+// The word 'QR Code' is registered trademark of
+// DENSO WAVE INCORPORATED
+//  http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+
+var qrcode = function() {
+
+  //---------------------------------------------------------------------
+  // qrcode
+  //---------------------------------------------------------------------
+
+  /**
+   * qrcode
+   * @param typeNumber 1 to 40
+   * @param errorCorrectionLevel 'L','M','Q','H'
+   */
+  var qrcode = function(typeNumber, errorCorrectionLevel) {
+
+    var PAD0 = 0xEC;
+    var PAD1 = 0x11;
+
+    var _typeNumber = typeNumber;
+    var _errorCorrectionLevel = QRErrorCorrectionLevel[errorCorrectionLevel];
+    var _modules = null;
+    var _moduleCount = 0;
+    var _dataCache = null;
+    var _dataList = [];
+
+    var _this = {};
+
+    var makeImpl = function(test, maskPattern) {
+
+      _moduleCount = _typeNumber * 4 + 17;
+      _modules = function(moduleCount) {
+        var modules = new Array(moduleCount);
+        for (var row = 0; row < moduleCount; row += 1) {
+          modules[row] = new Array(moduleCount);
+          for (var col = 0; col < moduleCount; col += 1) {
+            modules[row][col] = null;
+          }
+        }
+        return modules;
+      }(_moduleCount);
+
+      setupPositionProbePattern(0, 0);
+      setupPositionProbePattern(_moduleCount - 7, 0);
+      setupPositionProbePattern(0, _moduleCount - 7);
+      setupPositionAdjustPattern();
+      setupTimingPattern();
+      setupTypeInfo(test, maskPattern);
+
+      if (_typeNumber >= 7) {
+        setupTypeNumber(test);
+      }
+
+      if (_dataCache == null) {
+        _dataCache = createData(_typeNumber, _errorCorrectionLevel, _dataList);
+      }
+
+      mapData(_dataCache, maskPattern);
+    };
+
+    var setupPositionProbePattern = function(row, col) {
+
+      for (var r = -1; r <= 7; r += 1) {
+
+        if (row + r <= -1 || _moduleCount <= row + r) continue;
+
+        for (var c = -1; c <= 7; c += 1) {
+
+          if (col + c <= -1 || _moduleCount <= col + c) continue;
+
+          if ( (0 <= r && r <= 6 && (c == 0 || c == 6) )
+              || (0 <= c && c <= 6 && (r == 0 || r == 6) )
+              || (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+            _modules[row + r][col + c] = true;
+          } else {
+            _modules[row + r][col + c] = false;
+          }
+        }
+      }
+    };
+
+    var getBestMaskPattern = function() {
+
+      var minLostPoint = 0;
+      var pattern = 0;
+
+      for (var i = 0; i < 8; i += 1) {
+
+        makeImpl(true, i);
+
+        var lostPoint = QRUtil.getLostPoint(_this);
+
+        if (i == 0 || minLostPoint > lostPoint) {
+          minLostPoint = lostPoint;
+          pattern = i;
+        }
+      }
+
+      return pattern;
+    };
+
+    var setupTimingPattern = function() {
+
+      for (var r = 8; r < _moduleCount - 8; r += 1) {
+        if (_modules[r][6] != null) {
+          continue;
+        }
+        _modules[r][6] = (r % 2 == 0);
+      }
+
+      for (var c = 8; c < _moduleCount - 8; c += 1) {
+        if (_modules[6][c] != null) {
+          continue;
+        }
+        _modules[6][c] = (c % 2 == 0);
+      }
+    };
+
+    var setupPositionAdjustPattern = function() {
+
+      var pos = QRUtil.getPatternPosition(_typeNumber);
+
+      for (var i = 0; i < pos.length; i += 1) {
+
+        for (var j = 0; j < pos.length; j += 1) {
+
+          var row = pos[i];
+          var col = pos[j];
+
+          if (_modules[row][col] != null) {
+            continue;
+          }
+
+          for (var r = -2; r <= 2; r += 1) {
+
+            for (var c = -2; c <= 2; c += 1) {
+
+              if (r == -2 || r == 2 || c == -2 || c == 2
+                  || (r == 0 && c == 0) ) {
+                _modules[row + r][col + c] = true;
+              } else {
+                _modules[row + r][col + c] = false;
+              }
+            }
+          }
+        }
+      }
+    };
+
+    var setupTypeNumber = function(test) {
+
+      var bits = QRUtil.getBCHTypeNumber(_typeNumber);
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[Math.floor(i / 3)][i % 3 + _moduleCount - 8 - 3] = mod;
+      }
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[i % 3 + _moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
+      }
+    };
+
+    var setupTypeInfo = function(test, maskPattern) {
+
+      var data = (_errorCorrectionLevel << 3) | maskPattern;
+      var bits = QRUtil.getBCHTypeInfo(data);
+
+      // vertical
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 6) {
+          _modules[i][8] = mod;
+        } else if (i < 8) {
+          _modules[i + 1][8] = mod;
+        } else {
+          _modules[_moduleCount - 15 + i][8] = mod;
+        }
+      }
+
+      // horizontal
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 8) {
+          _modules[8][_moduleCount - i - 1] = mod;
+        } else if (i < 9) {
+          _modules[8][15 - i - 1 + 1] = mod;
+        } else {
+          _modules[8][15 - i - 1] = mod;
+        }
+      }
+
+      // fixed module
+      _modules[_moduleCount - 8][8] = (!test);
+    };
+
+    var mapData = function(data, maskPattern) {
+
+      var inc = -1;
+      var row = _moduleCount - 1;
+      var bitIndex = 7;
+      var byteIndex = 0;
+      var maskFunc = QRUtil.getMaskFunction(maskPattern);
+
+      for (var col = _moduleCount - 1; col > 0; col -= 2) {
+
+        if (col == 6) col -= 1;
+
+        while (true) {
+
+          for (var c = 0; c < 2; c += 1) {
+
+            if (_modules[row][col - c] == null) {
+
+              var dark = false;
+
+              if (byteIndex < data.length) {
+                dark = ( ( (data[byteIndex] >>> bitIndex) & 1) == 1);
+              }
+
+              var mask = maskFunc(row, col - c);
+
+              if (mask) {
+                dark = !dark;
+              }
+
+              _modules[row][col - c] = dark;
+              bitIndex -= 1;
+
+              if (bitIndex == -1) {
+                byteIndex += 1;
+                bitIndex = 7;
+              }
+            }
+          }
+
+          row += inc;
+
+          if (row < 0 || _moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+    };
+
+    var createBytes = function(buffer, rsBlocks) {
+
+      var offset = 0;
+
+      var maxDcCount = 0;
+      var maxEcCount = 0;
+
+      var dcdata = new Array(rsBlocks.length);
+      var ecdata = new Array(rsBlocks.length);
+
+      for (var r = 0; r < rsBlocks.length; r += 1) {
+
+        var dcCount = rsBlocks[r].dataCount;
+        var ecCount = rsBlocks[r].totalCount - dcCount;
+
+        maxDcCount = Math.max(maxDcCount, dcCount);
+        maxEcCount = Math.max(maxEcCount, ecCount);
+
+        dcdata[r] = new Array(dcCount);
+
+        for (var i = 0; i < dcdata[r].length; i += 1) {
+          dcdata[r][i] = 0xff & buffer.getBuffer()[i + offset];
+        }
+        offset += dcCount;
+
+        var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+        var rawPoly = qrPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+        var modPoly = rawPoly.mod(rsPoly);
+        ecdata[r] = new Array(rsPoly.getLength() - 1);
+        for (var i = 0; i < ecdata[r].length; i += 1) {
+          var modIndex = i + modPoly.getLength() - ecdata[r].length;
+          ecdata[r][i] = (modIndex >= 0)? modPoly.getAt(modIndex) : 0;
+        }
+      }
+
+      var totalCodeCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalCodeCount += rsBlocks[i].totalCount;
+      }
+
+      var data = new Array(totalCodeCount);
+      var index = 0;
+
+      for (var i = 0; i < maxDcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < dcdata[r].length) {
+            data[index] = dcdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      for (var i = 0; i < maxEcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < ecdata[r].length) {
+            data[index] = ecdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      return data;
+    };
+
+    var createData = function(typeNumber, errorCorrectionLevel, dataList) {
+
+      var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectionLevel);
+
+      var buffer = qrBitBuffer();
+
+      for (var i = 0; i < dataList.length; i += 1) {
+        var data = dataList[i];
+        buffer.put(data.getMode(), 4);
+        buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+        data.write(buffer);
+      }
+
+      // calc num max data.
+      var totalDataCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalDataCount += rsBlocks[i].dataCount;
+      }
+
+      if (buffer.getLengthInBits() > totalDataCount * 8) {
+        throw 'code length overflow. ('
+          + buffer.getLengthInBits()
+          + '>'
+          + totalDataCount * 8
+          + ')';
+      }
+
+      // end code
+      if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+        buffer.put(0, 4);
+      }
+
+      // padding
+      while (buffer.getLengthInBits() % 8 != 0) {
+        buffer.putBit(false);
+      }
+
+      // padding
+      while (true) {
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD0, 8);
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD1, 8);
+      }
+
+      return createBytes(buffer, rsBlocks);
+    };
+
+    _this.addData = function(data, mode) {
+
+      mode = mode || 'Byte';
+
+      var newData = null;
+
+      switch(mode) {
+      case 'Numeric' :
+        newData = qrNumber(data);
+        break;
+      case 'Alphanumeric' :
+        newData = qrAlphaNum(data);
+        break;
+      case 'Byte' :
+        newData = qr8BitByte(data);
+        break;
+      case 'Kanji' :
+        newData = qrKanji(data);
+        break;
+      default :
+        throw 'mode:' + mode;
+      }
+
+      _dataList.push(newData);
+      _dataCache = null;
+    };
+
+    _this.isDark = function(row, col) {
+      if (row < 0 || _moduleCount <= row || col < 0 || _moduleCount <= col) {
+        throw row + ',' + col;
+      }
+      return _modules[row][col];
+    };
+
+    _this.getModuleCount = function() {
+      return _moduleCount;
+    };
+
+    _this.make = function() {
+      if (_typeNumber < 1) {
+        var typeNumber = 1;
+
+        for (; typeNumber < 40; typeNumber++) {
+          var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, _errorCorrectionLevel);
+          var buffer = qrBitBuffer();
+
+          for (var i = 0; i < _dataList.length; i++) {
+            var data = _dataList[i];
+            buffer.put(data.getMode(), 4);
+            buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+            data.write(buffer);
+          }
+
+          var totalDataCount = 0;
+          for (var i = 0; i < rsBlocks.length; i++) {
+            totalDataCount += rsBlocks[i].dataCount;
+          }
+
+          if (buffer.getLengthInBits() <= totalDataCount * 8) {
+            break;
+          }
+        }
+
+        _typeNumber = typeNumber;
+      }
+
+      makeImpl(false, getBestMaskPattern() );
+    };
+
+    _this.createTableTag = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var qrHtml = '';
+
+      qrHtml += '<table style="';
+      qrHtml += ' border-width: 0px; border-style: none;';
+      qrHtml += ' border-collapse: collapse;';
+      qrHtml += ' padding: 0px; margin: ' + margin + 'px;';
+      qrHtml += '">';
+      qrHtml += '<tbody>';
+
+      for (var r = 0; r < _this.getModuleCount(); r += 1) {
+
+        qrHtml += '<tr>';
+
+        for (var c = 0; c < _this.getModuleCount(); c += 1) {
+          qrHtml += '<td style="';
+          qrHtml += ' border-width: 0px; border-style: none;';
+          qrHtml += ' border-collapse: collapse;';
+          qrHtml += ' padding: 0px; margin: 0px;';
+          qrHtml += ' width: ' + cellSize + 'px;';
+          qrHtml += ' height: ' + cellSize + 'px;';
+          qrHtml += ' background-color: ';
+          qrHtml += _this.isDark(r, c)? '#000000' : '#ffffff';
+          qrHtml += ';';
+          qrHtml += '"/>';
+        }
+
+        qrHtml += '</tr>';
+      }
+
+      qrHtml += '</tbody>';
+      qrHtml += '</table>';
+
+      return qrHtml;
+    };
+
+    _this.createSvgTag = function(cellSize, margin, alt, title) {
+
+      var opts = {};
+      if (typeof arguments[0] == 'object') {
+        // Called by options.
+        opts = arguments[0];
+        // overwrite cellSize and margin.
+        cellSize = opts.cellSize;
+        margin = opts.margin;
+        alt = opts.alt;
+        title = opts.title;
+      }
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      // Compose alt property surrogate
+      alt = (typeof alt === 'string') ? {text: alt} : alt || {};
+      alt.text = alt.text || null;
+      alt.id = (alt.text) ? alt.id || 'qrcode-description' : null;
+
+      // Compose title property surrogate
+      title = (typeof title === 'string') ? {text: title} : title || {};
+      title.text = title.text || null;
+      title.id = (title.text) ? title.id || 'qrcode-title' : null;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var c, mc, r, mr, qrSvg='', rect;
+
+      rect = 'l' + cellSize + ',0 0,' + cellSize +
+        ' -' + cellSize + ',0 0,-' + cellSize + 'z ';
+
+      qrSvg += '<svg version="1.1" xmlns="http://www.w3.org/2000/svg"';
+      qrSvg += !opts.scalable ? ' width="' + size + 'px" height="' + size + 'px"' : '';
+      qrSvg += ' viewBox="0 0 ' + size + ' ' + size + '" ';
+      qrSvg += ' preserveAspectRatio="xMinYMin meet"';
+      qrSvg += (title.text || alt.text) ? ' role="img" aria-labelledby="' +
+          escapeXml([title.id, alt.id].join(' ').trim() ) + '"' : '';
+      qrSvg += '>';
+      qrSvg += (title.text) ? '<title id="' + escapeXml(title.id) + '">' +
+          escapeXml(title.text) + '</title>' : '';
+      qrSvg += (alt.text) ? '<description id="' + escapeXml(alt.id) + '">' +
+          escapeXml(alt.text) + '</description>' : '';
+      qrSvg += '<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>';
+      qrSvg += '<path d="';
+
+      for (r = 0; r < _this.getModuleCount(); r += 1) {
+        mr = r * cellSize + margin;
+        for (c = 0; c < _this.getModuleCount(); c += 1) {
+          if (_this.isDark(r, c) ) {
+            mc = c*cellSize+margin;
+            qrSvg += 'M' + mc + ',' + mr + rect;
+          }
+        }
+      }
+
+      qrSvg += '" stroke="transparent" fill="black"/>';
+      qrSvg += '</svg>';
+
+      return qrSvg;
+    };
+
+    _this.createDataURL = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      return createDataURL(size, size, function(x, y) {
+        if (min <= x && x < max && min <= y && y < max) {
+          var c = Math.floor( (x - min) / cellSize);
+          var r = Math.floor( (y - min) / cellSize);
+          return _this.isDark(r, c)? 0 : 1;
+        } else {
+          return 1;
+        }
+      } );
+    };
+
+    _this.createImgTag = function(cellSize, margin, alt) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+
+      var img = '';
+      img += '<img';
+      img += '\u0020src="';
+      img += _this.createDataURL(cellSize, margin);
+      img += '"';
+      img += '\u0020width="';
+      img += size;
+      img += '"';
+      img += '\u0020height="';
+      img += size;
+      img += '"';
+      if (alt) {
+        img += '\u0020alt="';
+        img += escapeXml(alt);
+        img += '"';
+      }
+      img += '/>';
+
+      return img;
+    };
+
+    var escapeXml = function(s) {
+      var escaped = '';
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charAt(i);
+        switch(c) {
+        case '<': escaped += '&lt;'; break;
+        case '>': escaped += '&gt;'; break;
+        case '&': escaped += '&amp;'; break;
+        case '"': escaped += '&quot;'; break;
+        default : escaped += c; break;
+        }
+      }
+      return escaped;
+    };
+
+    var _createHalfASCII = function(margin) {
+      var cellSize = 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r1, r2, p;
+
+      var blocks = {
+        '██': '█',
+        '█ ': '▀',
+        ' █': '▄',
+        '  ': ' '
+      };
+
+      var blocksLastLineNoMargin = {
+        '██': '▀',
+        '█ ': '▀',
+        ' █': ' ',
+        '  ': ' '
+      };
+
+      var ascii = '';
+      for (y = 0; y < size; y += 2) {
+        r1 = Math.floor((y - min) / cellSize);
+        r2 = Math.floor((y + 1 - min) / cellSize);
+        for (x = 0; x < size; x += 1) {
+          p = '█';
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r1, Math.floor((x - min) / cellSize))) {
+            p = ' ';
+          }
+
+          if (min <= x && x < max && min <= y+1 && y+1 < max && _this.isDark(r2, Math.floor((x - min) / cellSize))) {
+            p += ' ';
+          }
+          else {
+            p += '█';
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          ascii += (margin < 1 && y+1 >= max) ? blocksLastLineNoMargin[p] : blocks[p];
+        }
+
+        ascii += '\n';
+      }
+
+      if (size % 2 && margin > 0) {
+        return ascii.substring(0, ascii.length - size - 1) + Array(size+1).join('▀');
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.createASCII = function(cellSize, margin) {
+      cellSize = cellSize || 1;
+
+      if (cellSize < 2) {
+        return _createHalfASCII(margin);
+      }
+
+      cellSize -= 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r, p;
+
+      var white = Array(cellSize+1).join('██');
+      var black = Array(cellSize+1).join('  ');
+
+      var ascii = '';
+      var line = '';
+      for (y = 0; y < size; y += 1) {
+        r = Math.floor( (y - min) / cellSize);
+        line = '';
+        for (x = 0; x < size; x += 1) {
+          p = 1;
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r, Math.floor((x - min) / cellSize))) {
+            p = 0;
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          line += p ? white : black;
+        }
+
+        for (r = 0; r < cellSize; r += 1) {
+          ascii += line + '\n';
+        }
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.renderTo2dContext = function(context, cellSize) {
+      cellSize = cellSize || 2;
+      var length = _this.getModuleCount();
+      for (var row = 0; row < length; row++) {
+        for (var col = 0; col < length; col++) {
+          context.fillStyle = _this.isDark(row, col) ? 'black' : 'white';
+          context.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrcode.stringToBytes
+  //---------------------------------------------------------------------
+
+  qrcode.stringToBytesFuncs = {
+    'default' : function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        bytes.push(c & 0xff);
+      }
+      return bytes;
+    }
+  };
+
+  qrcode.stringToBytes = qrcode.stringToBytesFuncs['default'];
+
+  //---------------------------------------------------------------------
+  // qrcode.createStringToBytes
+  //---------------------------------------------------------------------
+
+  /**
+   * @param unicodeData base64 string of byte array.
+   * [16bit Unicode],[16bit Bytes], ...
+   * @param numChars
+   */
+  qrcode.createStringToBytes = function(unicodeData, numChars) {
+
+    // create conversion map.
+
+    var unicodeMap = function() {
+
+      var bin = base64DecodeInputStream(unicodeData);
+      var read = function() {
+        var b = bin.read();
+        if (b == -1) throw 'eof';
+        return b;
+      };
+
+      var count = 0;
+      var unicodeMap = {};
+      while (true) {
+        var b0 = bin.read();
+        if (b0 == -1) break;
+        var b1 = read();
+        var b2 = read();
+        var b3 = read();
+        var k = String.fromCharCode( (b0 << 8) | b1);
+        var v = (b2 << 8) | b3;
+        unicodeMap[k] = v;
+        count += 1;
+      }
+      if (count != numChars) {
+        throw count + ' != ' + numChars;
+      }
+
+      return unicodeMap;
+    }();
+
+    var unknownChar = '?'.charCodeAt(0);
+
+    return function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        if (c < 128) {
+          bytes.push(c);
+        } else {
+          var b = unicodeMap[s.charAt(i)];
+          if (typeof b == 'number') {
+            if ( (b & 0xff) == b) {
+              // 1byte
+              bytes.push(b);
+            } else {
+              // 2bytes
+              bytes.push(b >>> 8);
+              bytes.push(b & 0xff);
+            }
+          } else {
+            bytes.push(unknownChar);
+          }
+        }
+      }
+      return bytes;
+    };
+  };
+
+  //---------------------------------------------------------------------
+  // QRMode
+  //---------------------------------------------------------------------
+
+  var QRMode = {
+    MODE_NUMBER :    1 << 0,
+    MODE_ALPHA_NUM : 1 << 1,
+    MODE_8BIT_BYTE : 1 << 2,
+    MODE_KANJI :     1 << 3
+  };
+
+  //---------------------------------------------------------------------
+  // QRErrorCorrectionLevel
+  //---------------------------------------------------------------------
+
+  var QRErrorCorrectionLevel = {
+    L : 1,
+    M : 0,
+    Q : 3,
+    H : 2
+  };
+
+  //---------------------------------------------------------------------
+  // QRMaskPattern
+  //---------------------------------------------------------------------
+
+  var QRMaskPattern = {
+    PATTERN000 : 0,
+    PATTERN001 : 1,
+    PATTERN010 : 2,
+    PATTERN011 : 3,
+    PATTERN100 : 4,
+    PATTERN101 : 5,
+    PATTERN110 : 6,
+    PATTERN111 : 7
+  };
+
+  //---------------------------------------------------------------------
+  // QRUtil
+  //---------------------------------------------------------------------
+
+  var QRUtil = function() {
+
+    var PATTERN_POSITION_TABLE = [
+      [],
+      [6, 18],
+      [6, 22],
+      [6, 26],
+      [6, 30],
+      [6, 34],
+      [6, 22, 38],
+      [6, 24, 42],
+      [6, 26, 46],
+      [6, 28, 50],
+      [6, 30, 54],
+      [6, 32, 58],
+      [6, 34, 62],
+      [6, 26, 46, 66],
+      [6, 26, 48, 70],
+      [6, 26, 50, 74],
+      [6, 30, 54, 78],
+      [6, 30, 56, 82],
+      [6, 30, 58, 86],
+      [6, 34, 62, 90],
+      [6, 28, 50, 72, 94],
+      [6, 26, 50, 74, 98],
+      [6, 30, 54, 78, 102],
+      [6, 28, 54, 80, 106],
+      [6, 32, 58, 84, 110],
+      [6, 30, 58, 86, 114],
+      [6, 34, 62, 90, 118],
+      [6, 26, 50, 74, 98, 122],
+      [6, 30, 54, 78, 102, 126],
+      [6, 26, 52, 78, 104, 130],
+      [6, 30, 56, 82, 108, 134],
+      [6, 34, 60, 86, 112, 138],
+      [6, 30, 58, 86, 114, 142],
+      [6, 34, 62, 90, 118, 146],
+      [6, 30, 54, 78, 102, 126, 150],
+      [6, 24, 50, 76, 102, 128, 154],
+      [6, 28, 54, 80, 106, 132, 158],
+      [6, 32, 58, 84, 110, 136, 162],
+      [6, 26, 54, 82, 110, 138, 166],
+      [6, 30, 58, 86, 114, 142, 170]
+    ];
+    var G15 = (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0);
+    var G18 = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0);
+    var G15_MASK = (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1);
+
+    var _this = {};
+
+    var getBCHDigit = function(data) {
+      var digit = 0;
+      while (data != 0) {
+        digit += 1;
+        data >>>= 1;
+      }
+      return digit;
+    };
+
+    _this.getBCHTypeInfo = function(data) {
+      var d = data << 10;
+      while (getBCHDigit(d) - getBCHDigit(G15) >= 0) {
+        d ^= (G15 << (getBCHDigit(d) - getBCHDigit(G15) ) );
+      }
+      return ( (data << 10) | d) ^ G15_MASK;
+    };
+
+    _this.getBCHTypeNumber = function(data) {
+      var d = data << 12;
+      while (getBCHDigit(d) - getBCHDigit(G18) >= 0) {
+        d ^= (G18 << (getBCHDigit(d) - getBCHDigit(G18) ) );
+      }
+      return (data << 12) | d;
+    };
+
+    _this.getPatternPosition = function(typeNumber) {
+      return PATTERN_POSITION_TABLE[typeNumber - 1];
+    };
+
+    _this.getMaskFunction = function(maskPattern) {
+
+      switch (maskPattern) {
+
+      case QRMaskPattern.PATTERN000 :
+        return function(i, j) { return (i + j) % 2 == 0; };
+      case QRMaskPattern.PATTERN001 :
+        return function(i, j) { return i % 2 == 0; };
+      case QRMaskPattern.PATTERN010 :
+        return function(i, j) { return j % 3 == 0; };
+      case QRMaskPattern.PATTERN011 :
+        return function(i, j) { return (i + j) % 3 == 0; };
+      case QRMaskPattern.PATTERN100 :
+        return function(i, j) { return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 == 0; };
+      case QRMaskPattern.PATTERN101 :
+        return function(i, j) { return (i * j) % 2 + (i * j) % 3 == 0; };
+      case QRMaskPattern.PATTERN110 :
+        return function(i, j) { return ( (i * j) % 2 + (i * j) % 3) % 2 == 0; };
+      case QRMaskPattern.PATTERN111 :
+        return function(i, j) { return ( (i * j) % 3 + (i + j) % 2) % 2 == 0; };
+
+      default :
+        throw 'bad maskPattern:' + maskPattern;
+      }
+    };
+
+    _this.getErrorCorrectPolynomial = function(errorCorrectLength) {
+      var a = qrPolynomial([1], 0);
+      for (var i = 0; i < errorCorrectLength; i += 1) {
+        a = a.multiply(qrPolynomial([1, QRMath.gexp(i)], 0) );
+      }
+      return a;
+    };
+
+    _this.getLengthInBits = function(mode, type) {
+
+      if (1 <= type && type < 10) {
+
+        // 1 - 9
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 10;
+        case QRMode.MODE_ALPHA_NUM : return 9;
+        case QRMode.MODE_8BIT_BYTE : return 8;
+        case QRMode.MODE_KANJI     : return 8;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 27) {
+
+        // 10 - 26
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 12;
+        case QRMode.MODE_ALPHA_NUM : return 11;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 10;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 41) {
+
+        // 27 - 40
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 14;
+        case QRMode.MODE_ALPHA_NUM : return 13;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 12;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else {
+        throw 'type:' + type;
+      }
+    };
+
+    _this.getLostPoint = function(qrcode) {
+
+      var moduleCount = qrcode.getModuleCount();
+
+      var lostPoint = 0;
+
+      // LEVEL1
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount; col += 1) {
+
+          var sameCount = 0;
+          var dark = qrcode.isDark(row, col);
+
+          for (var r = -1; r <= 1; r += 1) {
+
+            if (row + r < 0 || moduleCount <= row + r) {
+              continue;
+            }
+
+            for (var c = -1; c <= 1; c += 1) {
+
+              if (col + c < 0 || moduleCount <= col + c) {
+                continue;
+              }
+
+              if (r == 0 && c == 0) {
+                continue;
+              }
+
+              if (dark == qrcode.isDark(row + r, col + c) ) {
+                sameCount += 1;
+              }
+            }
+          }
+
+          if (sameCount > 5) {
+            lostPoint += (3 + sameCount - 5);
+          }
+        }
+      };
+
+      // LEVEL2
+
+      for (var row = 0; row < moduleCount - 1; row += 1) {
+        for (var col = 0; col < moduleCount - 1; col += 1) {
+          var count = 0;
+          if (qrcode.isDark(row, col) ) count += 1;
+          if (qrcode.isDark(row + 1, col) ) count += 1;
+          if (qrcode.isDark(row, col + 1) ) count += 1;
+          if (qrcode.isDark(row + 1, col + 1) ) count += 1;
+          if (count == 0 || count == 4) {
+            lostPoint += 3;
+          }
+        }
+      }
+
+      // LEVEL3
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount - 6; col += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row, col + 1)
+              &&  qrcode.isDark(row, col + 2)
+              &&  qrcode.isDark(row, col + 3)
+              &&  qrcode.isDark(row, col + 4)
+              && !qrcode.isDark(row, col + 5)
+              &&  qrcode.isDark(row, col + 6) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount - 6; row += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row + 1, col)
+              &&  qrcode.isDark(row + 2, col)
+              &&  qrcode.isDark(row + 3, col)
+              &&  qrcode.isDark(row + 4, col)
+              && !qrcode.isDark(row + 5, col)
+              &&  qrcode.isDark(row + 6, col) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      // LEVEL4
+
+      var darkCount = 0;
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount; row += 1) {
+          if (qrcode.isDark(row, col) ) {
+            darkCount += 1;
+          }
+        }
+      }
+
+      var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+      lostPoint += ratio * 10;
+
+      return lostPoint;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // QRMath
+  //---------------------------------------------------------------------
+
+  var QRMath = function() {
+
+    var EXP_TABLE = new Array(256);
+    var LOG_TABLE = new Array(256);
+
+    // initialize tables
+    for (var i = 0; i < 8; i += 1) {
+      EXP_TABLE[i] = 1 << i;
+    }
+    for (var i = 8; i < 256; i += 1) {
+      EXP_TABLE[i] = EXP_TABLE[i - 4]
+        ^ EXP_TABLE[i - 5]
+        ^ EXP_TABLE[i - 6]
+        ^ EXP_TABLE[i - 8];
+    }
+    for (var i = 0; i < 255; i += 1) {
+      LOG_TABLE[EXP_TABLE[i] ] = i;
+    }
+
+    var _this = {};
+
+    _this.glog = function(n) {
+
+      if (n < 1) {
+        throw 'glog(' + n + ')';
+      }
+
+      return LOG_TABLE[n];
+    };
+
+    _this.gexp = function(n) {
+
+      while (n < 0) {
+        n += 255;
+      }
+
+      while (n >= 256) {
+        n -= 255;
+      }
+
+      return EXP_TABLE[n];
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrPolynomial
+  //---------------------------------------------------------------------
+
+  function qrPolynomial(num, shift) {
+
+    if (typeof num.length == 'undefined') {
+      throw num.length + '/' + shift;
+    }
+
+    var _num = function() {
+      var offset = 0;
+      while (offset < num.length && num[offset] == 0) {
+        offset += 1;
+      }
+      var _num = new Array(num.length - offset + shift);
+      for (var i = 0; i < num.length - offset; i += 1) {
+        _num[i] = num[i + offset];
+      }
+      return _num;
+    }();
+
+    var _this = {};
+
+    _this.getAt = function(index) {
+      return _num[index];
+    };
+
+    _this.getLength = function() {
+      return _num.length;
+    };
+
+    _this.multiply = function(e) {
+
+      var num = new Array(_this.getLength() + e.getLength() - 1);
+
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        for (var j = 0; j < e.getLength(); j += 1) {
+          num[i + j] ^= QRMath.gexp(QRMath.glog(_this.getAt(i) ) + QRMath.glog(e.getAt(j) ) );
+        }
+      }
+
+      return qrPolynomial(num, 0);
+    };
+
+    _this.mod = function(e) {
+
+      if (_this.getLength() - e.getLength() < 0) {
+        return _this;
+      }
+
+      var ratio = QRMath.glog(_this.getAt(0) ) - QRMath.glog(e.getAt(0) );
+
+      var num = new Array(_this.getLength() );
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        num[i] = _this.getAt(i);
+      }
+
+      for (var i = 0; i < e.getLength(); i += 1) {
+        num[i] ^= QRMath.gexp(QRMath.glog(e.getAt(i) ) + ratio);
+      }
+
+      // recursive call
+      return qrPolynomial(num, 0).mod(e);
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // QRRSBlock
+  //---------------------------------------------------------------------
+
+  var QRRSBlock = function() {
+
+    var RS_BLOCK_TABLE = [
+
+      // L
+      // M
+      // Q
+      // H
+
+      // 1
+      [1, 26, 19],
+      [1, 26, 16],
+      [1, 26, 13],
+      [1, 26, 9],
+
+      // 2
+      [1, 44, 34],
+      [1, 44, 28],
+      [1, 44, 22],
+      [1, 44, 16],
+
+      // 3
+      [1, 70, 55],
+      [1, 70, 44],
+      [2, 35, 17],
+      [2, 35, 13],
+
+      // 4
+      [1, 100, 80],
+      [2, 50, 32],
+      [2, 50, 24],
+      [4, 25, 9],
+
+      // 5
+      [1, 134, 108],
+      [2, 67, 43],
+      [2, 33, 15, 2, 34, 16],
+      [2, 33, 11, 2, 34, 12],
+
+      // 6
+      [2, 86, 68],
+      [4, 43, 27],
+      [4, 43, 19],
+      [4, 43, 15],
+
+      // 7
+      [2, 98, 78],
+      [4, 49, 31],
+      [2, 32, 14, 4, 33, 15],
+      [4, 39, 13, 1, 40, 14],
+
+      // 8
+      [2, 121, 97],
+      [2, 60, 38, 2, 61, 39],
+      [4, 40, 18, 2, 41, 19],
+      [4, 40, 14, 2, 41, 15],
+
+      // 9
+      [2, 146, 116],
+      [3, 58, 36, 2, 59, 37],
+      [4, 36, 16, 4, 37, 17],
+      [4, 36, 12, 4, 37, 13],
+
+      // 10
+      [2, 86, 68, 2, 87, 69],
+      [4, 69, 43, 1, 70, 44],
+      [6, 43, 19, 2, 44, 20],
+      [6, 43, 15, 2, 44, 16],
+
+      // 11
+      [4, 101, 81],
+      [1, 80, 50, 4, 81, 51],
+      [4, 50, 22, 4, 51, 23],
+      [3, 36, 12, 8, 37, 13],
+
+      // 12
+      [2, 116, 92, 2, 117, 93],
+      [6, 58, 36, 2, 59, 37],
+      [4, 46, 20, 6, 47, 21],
+      [7, 42, 14, 4, 43, 15],
+
+      // 13
+      [4, 133, 107],
+      [8, 59, 37, 1, 60, 38],
+      [8, 44, 20, 4, 45, 21],
+      [12, 33, 11, 4, 34, 12],
+
+      // 14
+      [3, 145, 115, 1, 146, 116],
+      [4, 64, 40, 5, 65, 41],
+      [11, 36, 16, 5, 37, 17],
+      [11, 36, 12, 5, 37, 13],
+
+      // 15
+      [5, 109, 87, 1, 110, 88],
+      [5, 65, 41, 5, 66, 42],
+      [5, 54, 24, 7, 55, 25],
+      [11, 36, 12, 7, 37, 13],
+
+      // 16
+      [5, 122, 98, 1, 123, 99],
+      [7, 73, 45, 3, 74, 46],
+      [15, 43, 19, 2, 44, 20],
+      [3, 45, 15, 13, 46, 16],
+
+      // 17
+      [1, 135, 107, 5, 136, 108],
+      [10, 74, 46, 1, 75, 47],
+      [1, 50, 22, 15, 51, 23],
+      [2, 42, 14, 17, 43, 15],
+
+      // 18
+      [5, 150, 120, 1, 151, 121],
+      [9, 69, 43, 4, 70, 44],
+      [17, 50, 22, 1, 51, 23],
+      [2, 42, 14, 19, 43, 15],
+
+      // 19
+      [3, 141, 113, 4, 142, 114],
+      [3, 70, 44, 11, 71, 45],
+      [17, 47, 21, 4, 48, 22],
+      [9, 39, 13, 16, 40, 14],
+
+      // 20
+      [3, 135, 107, 5, 136, 108],
+      [3, 67, 41, 13, 68, 42],
+      [15, 54, 24, 5, 55, 25],
+      [15, 43, 15, 10, 44, 16],
+
+      // 21
+      [4, 144, 116, 4, 145, 117],
+      [17, 68, 42],
+      [17, 50, 22, 6, 51, 23],
+      [19, 46, 16, 6, 47, 17],
+
+      // 22
+      [2, 139, 111, 7, 140, 112],
+      [17, 74, 46],
+      [7, 54, 24, 16, 55, 25],
+      [34, 37, 13],
+
+      // 23
+      [4, 151, 121, 5, 152, 122],
+      [4, 75, 47, 14, 76, 48],
+      [11, 54, 24, 14, 55, 25],
+      [16, 45, 15, 14, 46, 16],
+
+      // 24
+      [6, 147, 117, 4, 148, 118],
+      [6, 73, 45, 14, 74, 46],
+      [11, 54, 24, 16, 55, 25],
+      [30, 46, 16, 2, 47, 17],
+
+      // 25
+      [8, 132, 106, 4, 133, 107],
+      [8, 75, 47, 13, 76, 48],
+      [7, 54, 24, 22, 55, 25],
+      [22, 45, 15, 13, 46, 16],
+
+      // 26
+      [10, 142, 114, 2, 143, 115],
+      [19, 74, 46, 4, 75, 47],
+      [28, 50, 22, 6, 51, 23],
+      [33, 46, 16, 4, 47, 17],
+
+      // 27
+      [8, 152, 122, 4, 153, 123],
+      [22, 73, 45, 3, 74, 46],
+      [8, 53, 23, 26, 54, 24],
+      [12, 45, 15, 28, 46, 16],
+
+      // 28
+      [3, 147, 117, 10, 148, 118],
+      [3, 73, 45, 23, 74, 46],
+      [4, 54, 24, 31, 55, 25],
+      [11, 45, 15, 31, 46, 16],
+
+      // 29
+      [7, 146, 116, 7, 147, 117],
+      [21, 73, 45, 7, 74, 46],
+      [1, 53, 23, 37, 54, 24],
+      [19, 45, 15, 26, 46, 16],
+
+      // 30
+      [5, 145, 115, 10, 146, 116],
+      [19, 75, 47, 10, 76, 48],
+      [15, 54, 24, 25, 55, 25],
+      [23, 45, 15, 25, 46, 16],
+
+      // 31
+      [13, 145, 115, 3, 146, 116],
+      [2, 74, 46, 29, 75, 47],
+      [42, 54, 24, 1, 55, 25],
+      [23, 45, 15, 28, 46, 16],
+
+      // 32
+      [17, 145, 115],
+      [10, 74, 46, 23, 75, 47],
+      [10, 54, 24, 35, 55, 25],
+      [19, 45, 15, 35, 46, 16],
+
+      // 33
+      [17, 145, 115, 1, 146, 116],
+      [14, 74, 46, 21, 75, 47],
+      [29, 54, 24, 19, 55, 25],
+      [11, 45, 15, 46, 46, 16],
+
+      // 34
+      [13, 145, 115, 6, 146, 116],
+      [14, 74, 46, 23, 75, 47],
+      [44, 54, 24, 7, 55, 25],
+      [59, 46, 16, 1, 47, 17],
+
+      // 35
+      [12, 151, 121, 7, 152, 122],
+      [12, 75, 47, 26, 76, 48],
+      [39, 54, 24, 14, 55, 25],
+      [22, 45, 15, 41, 46, 16],
+
+      // 36
+      [6, 151, 121, 14, 152, 122],
+      [6, 75, 47, 34, 76, 48],
+      [46, 54, 24, 10, 55, 25],
+      [2, 45, 15, 64, 46, 16],
+
+      // 37
+      [17, 152, 122, 4, 153, 123],
+      [29, 74, 46, 14, 75, 47],
+      [49, 54, 24, 10, 55, 25],
+      [24, 45, 15, 46, 46, 16],
+
+      // 38
+      [4, 152, 122, 18, 153, 123],
+      [13, 74, 46, 32, 75, 47],
+      [48, 54, 24, 14, 55, 25],
+      [42, 45, 15, 32, 46, 16],
+
+      // 39
+      [20, 147, 117, 4, 148, 118],
+      [40, 75, 47, 7, 76, 48],
+      [43, 54, 24, 22, 55, 25],
+      [10, 45, 15, 67, 46, 16],
+
+      // 40
+      [19, 148, 118, 6, 149, 119],
+      [18, 75, 47, 31, 76, 48],
+      [34, 54, 24, 34, 55, 25],
+      [20, 45, 15, 61, 46, 16]
+    ];
+
+    var qrRSBlock = function(totalCount, dataCount) {
+      var _this = {};
+      _this.totalCount = totalCount;
+      _this.dataCount = dataCount;
+      return _this;
+    };
+
+    var _this = {};
+
+    var getRsBlockTable = function(typeNumber, errorCorrectionLevel) {
+
+      switch(errorCorrectionLevel) {
+      case QRErrorCorrectionLevel.L :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+      case QRErrorCorrectionLevel.M :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+      case QRErrorCorrectionLevel.Q :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+      case QRErrorCorrectionLevel.H :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+      default :
+        return undefined;
+      }
+    };
+
+    _this.getRSBlocks = function(typeNumber, errorCorrectionLevel) {
+
+      var rsBlock = getRsBlockTable(typeNumber, errorCorrectionLevel);
+
+      if (typeof rsBlock == 'undefined') {
+        throw 'bad rs block @ typeNumber:' + typeNumber +
+            '/errorCorrectionLevel:' + errorCorrectionLevel;
+      }
+
+      var length = rsBlock.length / 3;
+
+      var list = [];
+
+      for (var i = 0; i < length; i += 1) {
+
+        var count = rsBlock[i * 3 + 0];
+        var totalCount = rsBlock[i * 3 + 1];
+        var dataCount = rsBlock[i * 3 + 2];
+
+        for (var j = 0; j < count; j += 1) {
+          list.push(qrRSBlock(totalCount, dataCount) );
+        }
+      }
+
+      return list;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrBitBuffer
+  //---------------------------------------------------------------------
+
+  var qrBitBuffer = function() {
+
+    var _buffer = [];
+    var _length = 0;
+
+    var _this = {};
+
+    _this.getBuffer = function() {
+      return _buffer;
+    };
+
+    _this.getAt = function(index) {
+      var bufIndex = Math.floor(index / 8);
+      return ( (_buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+    };
+
+    _this.put = function(num, length) {
+      for (var i = 0; i < length; i += 1) {
+        _this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+      }
+    };
+
+    _this.getLengthInBits = function() {
+      return _length;
+    };
+
+    _this.putBit = function(bit) {
+
+      var bufIndex = Math.floor(_length / 8);
+      if (_buffer.length <= bufIndex) {
+        _buffer.push(0);
+      }
+
+      if (bit) {
+        _buffer[bufIndex] |= (0x80 >>> (_length % 8) );
+      }
+
+      _length += 1;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrNumber
+  //---------------------------------------------------------------------
+
+  var qrNumber = function(data) {
+
+    var _mode = QRMode.MODE_NUMBER;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _data;
+
+      var i = 0;
+
+      while (i + 2 < data.length) {
+        buffer.put(strToNum(data.substring(i, i + 3) ), 10);
+        i += 3;
+      }
+
+      if (i < data.length) {
+        if (data.length - i == 1) {
+          buffer.put(strToNum(data.substring(i, i + 1) ), 4);
+        } else if (data.length - i == 2) {
+          buffer.put(strToNum(data.substring(i, i + 2) ), 7);
+        }
+      }
+    };
+
+    var strToNum = function(s) {
+      var num = 0;
+      for (var i = 0; i < s.length; i += 1) {
+        num = num * 10 + chatToNum(s.charAt(i) );
+      }
+      return num;
+    };
+
+    var chatToNum = function(c) {
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      }
+      throw 'illegal char :' + c;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrAlphaNum
+  //---------------------------------------------------------------------
+
+  var qrAlphaNum = function(data) {
+
+    var _mode = QRMode.MODE_ALPHA_NUM;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var s = _data;
+
+      var i = 0;
+
+      while (i + 1 < s.length) {
+        buffer.put(
+          getCode(s.charAt(i) ) * 45 +
+          getCode(s.charAt(i + 1) ), 11);
+        i += 2;
+      }
+
+      if (i < s.length) {
+        buffer.put(getCode(s.charAt(i) ), 6);
+      }
+    };
+
+    var getCode = function(c) {
+
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      } else if ('A' <= c && c <= 'Z') {
+        return c.charCodeAt(0) - 'A'.charCodeAt(0) + 10;
+      } else {
+        switch (c) {
+        case ' ' : return 36;
+        case '$' : return 37;
+        case '%' : return 38;
+        case '*' : return 39;
+        case '+' : return 40;
+        case '-' : return 41;
+        case '.' : return 42;
+        case '/' : return 43;
+        case ':' : return 44;
+        default :
+          throw 'illegal char :' + c;
+        }
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qr8BitByte
+  //---------------------------------------------------------------------
+
+  var qr8BitByte = function(data) {
+
+    var _mode = QRMode.MODE_8BIT_BYTE;
+    var _data = data;
+    var _bytes = qrcode.stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _bytes.length;
+    };
+
+    _this.write = function(buffer) {
+      for (var i = 0; i < _bytes.length; i += 1) {
+        buffer.put(_bytes[i], 8);
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrKanji
+  //---------------------------------------------------------------------
+
+  var qrKanji = function(data) {
+
+    var _mode = QRMode.MODE_KANJI;
+    var _data = data;
+
+    var stringToBytes = qrcode.stringToBytesFuncs['SJIS'];
+    if (!stringToBytes) {
+      throw 'sjis not supported.';
+    }
+    !function(c, code) {
+      // self test for sjis support.
+      var test = stringToBytes(c);
+      if (test.length != 2 || ( (test[0] << 8) | test[1]) != code) {
+        throw 'sjis not supported.';
+      }
+    }('\u53cb', 0x9746);
+
+    var _bytes = stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return ~~(_bytes.length / 2);
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _bytes;
+
+      var i = 0;
+
+      while (i + 1 < data.length) {
+
+        var c = ( (0xff & data[i]) << 8) | (0xff & data[i + 1]);
+
+        if (0x8140 <= c && c <= 0x9FFC) {
+          c -= 0x8140;
+        } else if (0xE040 <= c && c <= 0xEBBF) {
+          c -= 0xC140;
+        } else {
+          throw 'illegal char at ' + (i + 1) + '/' + c;
+        }
+
+        c = ( (c >>> 8) & 0xff) * 0xC0 + (c & 0xff);
+
+        buffer.put(c, 13);
+
+        i += 2;
+      }
+
+      if (i < data.length) {
+        throw 'illegal char at ' + (i + 1);
+      }
+    };
+
+    return _this;
+  };
+
+  //=====================================================================
+  // GIF Support etc.
+  //
+
+  //---------------------------------------------------------------------
+  // byteArrayOutputStream
+  //---------------------------------------------------------------------
+
+  var byteArrayOutputStream = function() {
+
+    var _bytes = [];
+
+    var _this = {};
+
+    _this.writeByte = function(b) {
+      _bytes.push(b & 0xff);
+    };
+
+    _this.writeShort = function(i) {
+      _this.writeByte(i);
+      _this.writeByte(i >>> 8);
+    };
+
+    _this.writeBytes = function(b, off, len) {
+      off = off || 0;
+      len = len || b.length;
+      for (var i = 0; i < len; i += 1) {
+        _this.writeByte(b[i + off]);
+      }
+    };
+
+    _this.writeString = function(s) {
+      for (var i = 0; i < s.length; i += 1) {
+        _this.writeByte(s.charCodeAt(i) );
+      }
+    };
+
+    _this.toByteArray = function() {
+      return _bytes;
+    };
+
+    _this.toString = function() {
+      var s = '';
+      s += '[';
+      for (var i = 0; i < _bytes.length; i += 1) {
+        if (i > 0) {
+          s += ',';
+        }
+        s += _bytes[i];
+      }
+      s += ']';
+      return s;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64EncodeOutputStream
+  //---------------------------------------------------------------------
+
+  var base64EncodeOutputStream = function() {
+
+    var _buffer = 0;
+    var _buflen = 0;
+    var _length = 0;
+    var _base64 = '';
+
+    var _this = {};
+
+    var writeEncoded = function(b) {
+      _base64 += String.fromCharCode(encode(b & 0x3f) );
+    };
+
+    var encode = function(n) {
+      if (n < 0) {
+        // error.
+      } else if (n < 26) {
+        return 0x41 + n;
+      } else if (n < 52) {
+        return 0x61 + (n - 26);
+      } else if (n < 62) {
+        return 0x30 + (n - 52);
+      } else if (n == 62) {
+        return 0x2b;
+      } else if (n == 63) {
+        return 0x2f;
+      }
+      throw 'n:' + n;
+    };
+
+    _this.writeByte = function(n) {
+
+      _buffer = (_buffer << 8) | (n & 0xff);
+      _buflen += 8;
+      _length += 1;
+
+      while (_buflen >= 6) {
+        writeEncoded(_buffer >>> (_buflen - 6) );
+        _buflen -= 6;
+      }
+    };
+
+    _this.flush = function() {
+
+      if (_buflen > 0) {
+        writeEncoded(_buffer << (6 - _buflen) );
+        _buffer = 0;
+        _buflen = 0;
+      }
+
+      if (_length % 3 != 0) {
+        // padding
+        var padlen = 3 - _length % 3;
+        for (var i = 0; i < padlen; i += 1) {
+          _base64 += '=';
+        }
+      }
+    };
+
+    _this.toString = function() {
+      return _base64;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64DecodeInputStream
+  //---------------------------------------------------------------------
+
+  var base64DecodeInputStream = function(str) {
+
+    var _str = str;
+    var _pos = 0;
+    var _buffer = 0;
+    var _buflen = 0;
+
+    var _this = {};
+
+    _this.read = function() {
+
+      while (_buflen < 8) {
+
+        if (_pos >= _str.length) {
+          if (_buflen == 0) {
+            return -1;
+          }
+          throw 'unexpected end of file./' + _buflen;
+        }
+
+        var c = _str.charAt(_pos);
+        _pos += 1;
+
+        if (c == '=') {
+          _buflen = 0;
+          return -1;
+        } else if (c.match(/^\s$/) ) {
+          // ignore if whitespace.
+          continue;
+        }
+
+        _buffer = (_buffer << 6) | decode(c.charCodeAt(0) );
+        _buflen += 6;
+      }
+
+      var n = (_buffer >>> (_buflen - 8) ) & 0xff;
+      _buflen -= 8;
+      return n;
+    };
+
+    var decode = function(c) {
+      if (0x41 <= c && c <= 0x5a) {
+        return c - 0x41;
+      } else if (0x61 <= c && c <= 0x7a) {
+        return c - 0x61 + 26;
+      } else if (0x30 <= c && c <= 0x39) {
+        return c - 0x30 + 52;
+      } else if (c == 0x2b) {
+        return 62;
+      } else if (c == 0x2f) {
+        return 63;
+      } else {
+        throw 'c:' + c;
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // gifImage (B/W)
+  //---------------------------------------------------------------------
+
+  var gifImage = function(width, height) {
+
+    var _width = width;
+    var _height = height;
+    var _data = new Array(width * height);
+
+    var _this = {};
+
+    _this.setPixel = function(x, y, pixel) {
+      _data[y * _width + x] = pixel;
+    };
+
+    _this.write = function(out) {
+
+      //---------------------------------
+      // GIF Signature
+
+      out.writeString('GIF87a');
+
+      //---------------------------------
+      // Screen Descriptor
+
+      out.writeShort(_width);
+      out.writeShort(_height);
+
+      out.writeByte(0x80); // 2bit
+      out.writeByte(0);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Global Color Map
+
+      // black
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+
+      // white
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+
+      //---------------------------------
+      // Image Descriptor
+
+      out.writeString(',');
+      out.writeShort(0);
+      out.writeShort(0);
+      out.writeShort(_width);
+      out.writeShort(_height);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Local Color Map
+
+      //---------------------------------
+      // Raster Data
+
+      var lzwMinCodeSize = 2;
+      var raster = getLZWRaster(lzwMinCodeSize);
+
+      out.writeByte(lzwMinCodeSize);
+
+      var offset = 0;
+
+      while (raster.length - offset > 255) {
+        out.writeByte(255);
+        out.writeBytes(raster, offset, 255);
+        offset += 255;
+      }
+
+      out.writeByte(raster.length - offset);
+      out.writeBytes(raster, offset, raster.length - offset);
+      out.writeByte(0x00);
+
+      //---------------------------------
+      // GIF Terminator
+      out.writeString(';');
+    };
+
+    var bitOutputStream = function(out) {
+
+      var _out = out;
+      var _bitLength = 0;
+      var _bitBuffer = 0;
+
+      var _this = {};
+
+      _this.write = function(data, length) {
+
+        if ( (data >>> length) != 0) {
+          throw 'length over';
+        }
+
+        while (_bitLength + length >= 8) {
+          _out.writeByte(0xff & ( (data << _bitLength) | _bitBuffer) );
+          length -= (8 - _bitLength);
+          data >>>= (8 - _bitLength);
+          _bitBuffer = 0;
+          _bitLength = 0;
+        }
+
+        _bitBuffer = (data << _bitLength) | _bitBuffer;
+        _bitLength = _bitLength + length;
+      };
+
+      _this.flush = function() {
+        if (_bitLength > 0) {
+          _out.writeByte(_bitBuffer);
+        }
+      };
+
+      return _this;
+    };
+
+    var getLZWRaster = function(lzwMinCodeSize) {
+
+      var clearCode = 1 << lzwMinCodeSize;
+      var endCode = (1 << lzwMinCodeSize) + 1;
+      var bitLength = lzwMinCodeSize + 1;
+
+      // Setup LZWTable
+      var table = lzwTable();
+
+      for (var i = 0; i < clearCode; i += 1) {
+        table.add(String.fromCharCode(i) );
+      }
+      table.add(String.fromCharCode(clearCode) );
+      table.add(String.fromCharCode(endCode) );
+
+      var byteOut = byteArrayOutputStream();
+      var bitOut = bitOutputStream(byteOut);
+
+      // clear code
+      bitOut.write(clearCode, bitLength);
+
+      var dataIndex = 0;
+
+      var s = String.fromCharCode(_data[dataIndex]);
+      dataIndex += 1;
+
+      while (dataIndex < _data.length) {
+
+        var c = String.fromCharCode(_data[dataIndex]);
+        dataIndex += 1;
+
+        if (table.contains(s + c) ) {
+
+          s = s + c;
+
+        } else {
+
+          bitOut.write(table.indexOf(s), bitLength);
+
+          if (table.size() < 0xfff) {
+
+            if (table.size() == (1 << bitLength) ) {
+              bitLength += 1;
+            }
+
+            table.add(s + c);
+          }
+
+          s = c;
+        }
+      }
+
+      bitOut.write(table.indexOf(s), bitLength);
+
+      // end code
+      bitOut.write(endCode, bitLength);
+
+      bitOut.flush();
+
+      return byteOut.toByteArray();
+    };
+
+    var lzwTable = function() {
+
+      var _map = {};
+      var _size = 0;
+
+      var _this = {};
+
+      _this.add = function(key) {
+        if (_this.contains(key) ) {
+          throw 'dup key:' + key;
+        }
+        _map[key] = _size;
+        _size += 1;
+      };
+
+      _this.size = function() {
+        return _size;
+      };
+
+      _this.indexOf = function(key) {
+        return _map[key];
+      };
+
+      _this.contains = function(key) {
+        return typeof _map[key] != 'undefined';
+      };
+
+      return _this;
+    };
+
+    return _this;
+  };
+
+  var createDataURL = function(width, height, getPixel) {
+    var gif = gifImage(width, height);
+    for (var y = 0; y < height; y += 1) {
+      for (var x = 0; x < width; x += 1) {
+        gif.setPixel(x, y, getPixel(x, y) );
+      }
+    }
+
+    var b = byteArrayOutputStream();
+    gif.write(b);
+
+    var base64 = base64EncodeOutputStream();
+    var bytes = b.toByteArray();
+    for (var i = 0; i < bytes.length; i += 1) {
+      base64.writeByte(bytes[i]);
+    }
+    base64.flush();
+
+    return 'data:image/gif;base64,' + base64;
+  };
+
+  //---------------------------------------------------------------------
+  // returns qrcode function.
+
+  return qrcode;
+}();
+
+// multibyte support
+!function() {
+
+  qrcode.stringToBytesFuncs['UTF-8'] = function(s) {
+    // http://stackoverflow.com/questions/18729405/how-to-convert-utf8-string-to-byte-array
+    function toUTF8Array(str) {
+      var utf8 = [];
+      for (var i=0; i < str.length; i++) {
+        var charcode = str.charCodeAt(i);
+        if (charcode < 0x80) utf8.push(charcode);
+        else if (charcode < 0x800) {
+          utf8.push(0xc0 | (charcode >> 6),
+              0x80 | (charcode & 0x3f));
+        }
+        else if (charcode < 0xd800 || charcode >= 0xe000) {
+          utf8.push(0xe0 | (charcode >> 12),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+        // surrogate pair
+        else {
+          i++;
+          // UTF-16 encodes 0x10000-0x10FFFF by
+          // subtracting 0x10000 and splitting the
+          // 20 bits of 0x0-0xFFFFF into two halves
+          charcode = 0x10000 + (((charcode & 0x3ff)<<10)
+            | (str.charCodeAt(i) & 0x3ff));
+          utf8.push(0xf0 | (charcode >>18),
+              0x80 | ((charcode>>12) & 0x3f),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+      }
+      return utf8;
+    }
+    return toUTF8Array(s);
+  };
+
+}();
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+      define([], factory);
+  } else if (typeof exports === 'object') {
+      module.exports = factory();
+  }
+}(function () {
+    return qrcode;
+}));
+;
+//---------------------------------------------------------------------
+//
+// QR Code Generator for JavaScript UTF8 Support (optional)
+//
+// Copyright (c) 2011 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//  http://www.opensource.org/licenses/mit-license.php
+//
+// The word 'QR Code' is registered trademark of
+// DENSO WAVE INCORPORATED
+//  http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+
+!function(qrcode) {
+
+  //---------------------------------------------------------------------
+  // overwrite qrcode.stringToBytes
+  //---------------------------------------------------------------------
+
+  qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8'];
+
+}(qrcode);
+
+const DATA = {"axes": [{"id": "econ", "theme": "econ", "num": "01", "title": {"fr": "Transition économique", "en": "Economic transition", "ar": "الانتقال الاقتصادي"}, "projects": [{"id": "PROMET-AlHaouz", "axe": "1", "titre": {"fr": "Relancer l'économie après le séisme", "en": "Reviving the economy after the earthquake", "ar": "إنعاش الاقتصاد بعد الزلزال"}, "acronyme": "PROMET", "titreLong": {"fr": "Relance économique post-séisme", "en": "Post earthquake economic recovery", "ar": "الإنعاش الاقتصادي بعد الزلزال"}, "mission": {"fr": "Suite au séisme de 2023, le projet vise le \nrenforcement et la revitalisation des activités entrepreneu_x0002_riales dans les zones touchées par le séisme, dans la transfor_x0002_mation structurelle écologique et sociale de l'économie  (« Reconstruire en mieux »), afin de rendre les activités  économiques plus durables, résilientes, et inclusives, notamment pour les femmes et les jeunes.", "en": "Following the 2023 earthquake, the project aims to strengthen and revitalise entrepreneurial activities in the affected areas, within an ecological and social structural transformation of the economy (“Build Back Better”), in order to make economic activities more sustainable, resilient and inclusive, particularly for women and young people.", "ar": "في أعقاب زلزال 2023، يهدف المشروع إلى تعزيز وإنعاش الأنشطة المقاولاتية في المناطق المتضررة، ضمن تحول هيكلي بيئي واجتماعي للاقتصاد (« إعادة البناء بشكل أفضل »)، لجعل الأنشطة الاقتصادية أكثر استدامة وصموداً وشمولية، خاصة للنساء والشباب."}, "partenaire": "Ministère de l'économie et des finances", "periode": "", "img": "images/projets/promet-alhaouz.jpg", "drive": "", "initiatives": [{"levier": {"fr": "Assistance technique"}, "icon": "🏔️", "titre": {"fr": "Le label « El Haouz » & VisitAlHaouz", "en": "The “El Haouz” label and VisitAlHaouz", "ar": "علامة « الحوز » ومنصة VisitAlHaouz"}, "accroche": {"fr": "Remettre le tourisme de montagne debout après le séisme, en faisant d'El Haouz une destination durable et connectée.", "en": "Putting mountain tourism back on its feet after the earthquake by making El Haouz a sustainable, connected destination.", "ar": "إنهاض السياحة الجبلية بعد الزلزال بجعل الحوز وجهة مستدامة ومتصلة رقمياً."}, "defi": {"fr": "Dans les montagnes d'Al Haouz frappées par le séisme, le tourisme et l'artisanat, sources de revenus vitales, souvent portées par des coopératives de femmes, se sont effondrés.", "en": "In the earthquake stricken mountains of Al Haouz, tourism and crafts, vital sources of income often carried by women's cooperatives, collapsed.", "ar": "في جبال الحوز المتضررة من الزلزال، انهارت السياحة والصناعة التقليدية، وهي مصادر دخل حيوية كثيراً ما تحملها تعاونيات نسائية."}, "reponse": {"fr": "PROMET a contribué à la structuration de la destination « El Haouz » comme tourisme durable : la marque VisitAlHaouz, avec portail web et plateforme de réservation en ligne, un centre d'accueil touristique, des produits durables (randonnée, artisanat écologique) et la formation des acteurs locaux", "en": "PROMET contributed to structuring the “El Haouz” destination as sustainable tourism: the VisitAlHaouz brand, with a web portal and online booking platform, a tourist welcome centre, sustainable products (hiking, eco friendly crafts) and the training of local actors.", "ar": "ساهم مشروع PROMET في هيكلة وجهة « الحوز » كسياحة مستدامة: علامة VisitAlHaouz ببوابة إلكترونية ومنصة للحجز عبر الإنترنت، ومركز لاستقبال السياح، ومنتجات مستدامة (المشي الجبلي، الصناعة التقليدية البيئية)، وتكوين الفاعلين المحليين."}, "declicType": "number", "chiffre": "0.16", "legchiffre": {"fr": "Un an après le séisme, les nuitées dans les hébergements classés d'Al Haouz ont progressé de 16 %, atteignant 613 002 nuitées à fin septembre 2024 grâce aux efforts de tous les acteurs.", "en": "One year after the earthquake, overnight stays in Al Haouz's classified accommodation rose by 16%, reaching 613,002 nights by the end of September 2024, thanks to the efforts of all stakeholders.", "ar": "بعد سنة من الزلزال، ارتفعت ليالي المبيت في مؤسسات الإيواء المصنفة بالحوز بنسبة 16%، لتبلغ 613.002 ليلة بنهاية شتنبر 2024، بفضل جهود جميع الفاعلين."}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Marrakech - Al Haouz", "en": "Marrakech, Al Haouz", "ar": "مراكش، الحوز"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "La labellisation territoriale, en plus de plateforme numérique et la montée en compétence des acteurs est réplicable dans tout territoire rural structurant une offre touristique durable.", "en": "Territorial labelling, together with a digital platform and the capacity building of actors, is replicable in any rural territory structuring a sustainable tourism offer.", "ar": "العلامة المجالية، إلى جانب المنصة الرقمية والرفع من كفاءة الفاعلين، قابلة للتكرار في أي مجال قروي يهيكل عرضاً سياحياً مستداماً."}, "contactNom": "", "contactRole": {"fr": "", "en": "", "ar": ""}, "contactMail": "", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/promet-alhaouz-01-le-label-el-haouz-visita.jpg"}, {"levier": {"fr": "Renforcement de capacités"}, "icon": "💻", "titre": {"fr": "Les kiosques digitaux ruraux", "en": "Rural digital kiosks", "ar": "الأكشاك الرقمية القروية"}, "accroche": {"fr": "Former des jeunes du territoire pour faire entrer les coopératives rurales dans l'ère numérique.", "en": "Training young people from the territory to bring rural cooperatives into the digital age.", "ar": "تكوين شباب من المجال لإدخال التعاونيات القروية إلى العصر الرقمي."}, "defi": {"fr": "Deux ans et demi après le séisme, la reconstruction des infrastructures avance, mais la relance économique passe aussi par le numérique or les TPE, coopératives et auto-entrepreneurs ruraux restent à l'écart de la transformation digitale.", "en": "Two and a half years after the earthquake, the reconstruction of infrastructure is moving forward, but economic recovery also runs through digital, while rural micro businesses, cooperatives and self employed people remain on the sidelines of digital transformation.", "ar": "بعد سنتين ونصف من الزلزال، تتقدم إعادة بناء البنيات التحتية، لكن الإنعاش الاقتصادي يمر أيضاً عبر الرقمي، فيما تظل المقاولات الصغرى جداً والتعاونيات والمقاولون الذاتيون بالعالم القروي على هامش التحول الرقمي."}, "reponse": {"fr": "Le dispositif KTD Rural (Kiosque de Transformation Digitale), porté par PROMET avec le Ministère de l'Économie et des Finances, forme de jeunes talents locaux pour qu'ils deviennent des « relais digitaux » au service des TPE, coopératives et auto-entrepreneurs de la région.", "en": "The KTD Rural scheme (Digital Transformation Kiosk), led by PROMET with the Ministry of Economy and Finance, trains local young talents to become “digital relays” serving the region's micro businesses, cooperatives and self employed people.", "ar": "تكوّن آلية KTD Rural (كشك التحول الرقمي)، التي يقودها مشروع PROMET مع وزارة الاقتصاد والمالية، مواهب شابة محلية لتصبح « وسطاء رقميين » في خدمة المقاولات الصغرى جداً والتعاونيات والمقاولين الذاتيين بالجهة."}, "declicType": "", "chiffre": "", "legchiffre": {"fr": "", "en": "", "ar": ""}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Marrakech - Al Haouz", "en": "Marrakech, Al Haouz", "ar": "مراكش، الحوز"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "Le modèle « relais digitaux locaux » est explicitement conçu comme pilote réplicable dans d'autres territoires ruraux marocains.", "en": "The “local digital relays” model is explicitly designed as a pilot replicable in other rural territories of Morocco.", "ar": "نموذج « الوسطاء الرقميون المحليون » مصمم صراحةً كنموذج تجريبي قابل للتكرار في مجالات قروية أخرى بالمغرب."}, "contactNom": "", "contactRole": {"fr": "", "en": "", "ar": ""}, "contactMail": "mailto:othmane.fahim@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/promet-alhaouz-02-les-kiosques-digitaux-ru.jpg"}]}, {"id": "WoMENA", "axe": "1", "titre": {"fr": "Renforcer la place économique des femmes", "en": "Strengthening women's economic role", "ar": "تعزيز المكانة الاقتصادية للنساء"}, "acronyme": "WoMENA", "titreLong": {"fr": "Renforcer la participation politique et économique des femmes dans la région MENA", "en": "Strengthening political and economic participation for women in the MENA Region", "ar": "تعزيز المشاركة السياسية والاقتصادية للنساء في منطقة الشرق الأوسط وشمال إفريقيا"}, "mission": {"fr": "Ce projet régional vise à renforcer la participation politique et économique des femmes dans six pays de la région MENA (Maroc, Égypte, Jordanie, Liban, Territoires palestiniens, Tunisie)", "en": "This regional project aims to strengthen the political and economic participation of women in six countries of the MENA region (Morocco, Egypt, Jordan, Lebanon, Palestinian Territories, Tunisia).", "ar": "يهدف هذا المشروع الجهوي إلى تعزيز المشاركة السياسية والاقتصادية للنساء في ست دول بمنطقة الشرق الأوسط وشمال إفريقيا (المغرب، مصر، الأردن، لبنان، الأراضي الفلسطينية، تونس)."}, "partenaire": "Arab Women Organization", "periode": "2022-2028", "img": "images/projets/womena.jpg", "drive": "", "initiatives": [{"levier": {"fr": "Renforcement de capacités"}, "icon": "🧵", "titre": {"fr": "Relancer les coopératives de femmes après le séisme", "en": "Relaunching women's cooperatives after the earthquake", "ar": "إعادة إطلاق التعاونيات النسائية بعد الزلزال"}, "accroche": {"fr": "Redonner aux femmes des villages sinistrés les moyens de reprendre leur activité et leurs revenus.", "en": "Giving the women of the stricken villages the means to resume their activity and their incomes.", "ar": "تمكين نساء القرى المتضررة من وسائل استئناف نشاطهن ومداخيلهن."}, "defi": {"fr": "Dans les villages d'Al Haouz frappés par le séisme, les coopératives féminines, souvent seules sources de revenus autonomes des femmes, ont vu leur activité s'effondrer.", "en": "In the earthquake stricken villages of Al Haouz, women's cooperatives, often the only autonomous source of income for women, saw their activity collapse.", "ar": "في قرى الحوز المتضررة من الزلزال، شهدت التعاونيات النسائية، التي كثيراً ما تكون المصدر المستقل الوحيد لدخل النساء، انهيار نشاطها."}, "reponse": {"fr": "Lors de sa première phase, WoMENA a déployé l'initiative Espaces Créatifs, combinant un programme de formation à la gestion et au marketing de produits, et un soutien psychologique (sessions d'écoute, activités culturelles et récréatives) pour accompagner la reprise.", "en": "In its first phase, WoMENA rolled out the Creative Spaces initiative, combining a training programme in management and product marketing with psychological support (listening sessions, cultural and recreational activities) to support the recovery.", "ar": "خلال مرحلته الأولى، أطلق مشروع WoMENA مبادرة « الفضاءات الإبداعية »، التي تجمع بين برنامج للتكوين في التدبير وتسويق المنتجات ودعم نفسي (جلسات إنصات، أنشطة ثقافية وترفيهية) لمواكبة الاستئناف."}, "declicType": "number", "chiffre": "200", "legchiffre": {"fr": "femmes des villages touchés par le séisme accompagnées vers la reprise de leur activité.", "en": "women from the earthquake stricken villages supported toward resuming their activity.", "ar": "امرأة من القرى المتضررة من الزلزال تمت مواكبتهن نحو استئناف نشاطهن."}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Marrakech - Al Haouz", "en": "Marrakech, Al Haouz", "ar": "مراكش، الحوز"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "Le modèle, formation économique couplée à un soutien psychosocial, est transposable à tout territoire où des femmes doivent relancer une activité après une crise.", "en": "The model, economic training coupled with psychosocial support, is transferable to any territory where women must relaunch an activity after a crisis.", "ar": "النموذج، تكوين اقتصادي مقترن بدعم نفسي اجتماعي، قابل للنقل إلى أي مجال يتعين فيه على النساء إعادة إطلاق نشاط بعد أزمة."}, "contactNom": "Omar Bennouna Zhar", "contactRole": {"fr": "Conseiller technique, WoMENA", "en": "Technical Advisor, WoMENA", "ar": "مستشار تقني، WoMENA"}, "contactMail": "omar.bennouna@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/womena-01-relancer-les-cooperative.jpg"}, {"levier": {"fr": "Assistance technique"}, "icon": "🛒", "titre": {"fr": "La place de marché numérique des coopératives", "en": "The cooperatives' digital marketplace", "ar": "المنصة الرقمية لتسويق منتجات التعاونيات"}, "accroche": {"fr": "Ouvrir aux coopératives de femmes des zones reculées l'accès aux marchés grâce au numérique.", "en": "Opening up market access for women's cooperatives in remote areas through digital tools.", "ar": "فتح الولوج إلى الأسواق أمام التعاونيات النسائية بالمناطق النائية عبر الرقمي."}, "defi": {"fr": "Les coopératives féminines des zones reculées produisent un artisanat de qualité mais peinent à accéder aux marchés, faute de canaux de vente et de compétences en commercialisation.", "en": "Women's cooperatives in remote areas produce quality crafts but struggle to access markets, for lack of sales channels and marketing skills.", "ar": "تنتج التعاونيات النسائية بالمناطق النائية صناعة تقليدية جيدة لكنها تجد صعوبة في الولوج إلى الأسواق، لغياب قنوات البيع ومهارات التسويق."}, "reponse": {"fr": "WoMENA soutient la mise en place de la première place de marché numérique régionale pour promouvoir et vendre les produits et l'artisanat des coopératives, assortie d'un programme intensif de renforcement des capacités, notamment sur le e-commerce.", "en": "WoMENA supports the setting up of the first regional digital marketplace to promote and sell the cooperatives' products and crafts, together with an intensive capacity building programme, particularly on e commerce.", "ar": "يدعم مشروع WoMENA إحداث أول منصة رقمية جهوية للترويج لمنتجات التعاونيات وصناعتها التقليدية وبيعها، مصحوبةً ببرنامج مكثف للرفع من القدرات، خاصة في التجارة الإلكترونية."}, "declicType": "number", "chiffre": "50", "legchiffre": {"fr": "femmes déjà bénéficiaires de cette marketplace et formées au e-commerce", "en": "women already benefiting from this marketplace and trained in e commerce", "ar": "امرأة استفدن بالفعل من هذه المنصة وتلقّين تكويناً في التجارة الإلكترونية"}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Marrakech - Al Haouz", "en": "Marrakech, Al Haouz", "ar": "مراكش، الحوز"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "Le couple place de marché numérique plus formation au e-commerce est réplicable dans toute filière coopérative cherchant à élargir ses débouchés.", "en": "The digital marketplace plus e commerce training pairing is replicable in any cooperative sector seeking to broaden its outlets.", "ar": "اقتران المنصة الرقمية بالتكوين في التجارة الإلكترونية قابل للتكرار في أي قطاع تعاوني يسعى إلى توسيع منافذه."}, "contactNom": "Omar Bennouna Zhar", "contactRole": {"fr": "Conseiller technique, WoMENA", "en": "Technical Advisor, WoMENA", "ar": "مستشار تقني، WoMENA"}, "contactMail": "omar.bennouna@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/womena-02-la-place-de-marche-numer.jpg"}]}, {"id": "POMIRE", "axe": "1", "titre": {"fr": "Mobiliser la diaspora pour le territoire", "en": "Mobilising the diaspora for the territory", "ar": "تعبئة الجالية لخدمة المجال"}, "acronyme": "POMIRE", "titreLong": {"fr": "Potentiels de la migration pour le développement socioéconomique", "en": "Potentials of migration for socio economic development", "ar": "إمكانات الهجرة من أجل التنمية الاجتماعية والاقتصادية"}, "mission": {"fr": "Mobiliser le potentiel économique des Marocains résidant à l'étranger (MRE) et des autres groupes de la diaspora, notamment subsaharienne, au service du développement économique durable du Maroc,", "en": "To mobilise the economic potential of Moroccans living abroad (MRE) and other diaspora groups, particularly from sub Saharan Africa, in the service of Morocco's sustainable economic development.", "ar": "تعبئة الإمكانات الاقتصادية لمغاربة العالم وغيرهم من فئات الجاليات، لا سيما من إفريقيا جنوب الصحراء، في خدمة التنمية الاقتصادية المستدامة للمغرب."}, "partenaire": "MAEC", "periode": "2023-2028", "img": "images/projets/pomire.jpg", "drive": "", "initiatives": [{"levier": {"fr": "Renforcement de capacités"}, "icon": "🌍", "titre": {"fr": "L'écosystème entrepreneurial de la diaspora à Tanger-Tétouan-Al Hoceïma", "en": "The diaspora entrepreneurial ecosystem in Tangier Tetouan Al Hoceima", "ar": "منظومة المقاولاتية للجالية بجهة طنجة تطوان الحسيمة"}, "accroche": {"fr": "Faire de la région de Tanger un territoire qui attire et concrétise les projets d'investissement de sa diaspora.", "en": "Making the Tangier region a territory that attracts and brings to life its diaspora's investment projects.", "ar": "جعل جهة طنجة مجالاً يستقطب مشاريع استثمار جاليته ويُجسّدها."}, "defi": {"fr": "De plus en plus de Marocains résidant à l'étranger veulent investir et entreprendre au pays, mais les services d'accompagnement et l'écosystème local ne sont pas encore organisés pour transformer cette volonté en entreprises et en emplois sur le territoire.", "en": "More and more Moroccans living abroad want to invest and start businesses back home, but support services and the local ecosystem are not yet organised to turn this willingness into businesses and jobs on the ground.", "ar": "يرغب عدد متزايد من مغاربة العالم في الاستثمار وإنشاء المقاولات ببلدهم، لكن خدمات المواكبة والمنظومة المحلية لم تُنظَّم بعد لتحويل هذه الرغبة إلى مقاولات ومناصب شغل على أرض الواقع."}, "reponse": {"fr": "Dans sa région pilote Tanger-Tétouan-Al Hoceïma, POMIRE appuie la modernisation des services d'intégration socio-économique, accompagne les porteurs de projets dans la création et la post-création d'entreprises innovantes, et renforce la mise en réseau des acteurs locaux de l'écosystème.", "en": "In its pilot region Tangier Tetouan Al Hoceima, POMIRE supports the modernisation of socio economic integration services, accompanies project holders in the creation and post creation of innovative businesses, and strengthens the networking of local ecosystem actors.", "ar": "في جهتها النموذجية طنجة تطوان الحسيمة، يدعم مشروع POMIRE تحديث خدمات الإدماج الاجتماعي الاقتصادي، ويواكب حاملي المشاريع في إحداث المقاولات المبتكرة وما بعد إحداثها، ويعزز التشبيك بين الفاعلين المحليين للمنظومة."}, "declicType": "", "chiffre": "", "legchiffre": {"fr": "", "en": "", "ar": ""}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Tanger-Tetouan-Alhoceima", "en": "Tangier Tetouan Al Hoceima", "ar": "طنجة تطوان الحسيمة"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "L'approche est transposable à toute région cherchant à mobiliser ses ressortissants à l'étranger comme levier de développement local.", "en": "The approach is transferable to any region seeking to mobilise its nationals abroad as a lever for local development.", "ar": "المقاربة قابلة للنقل إلى أي جهة تسعى إلى تعبئة مواطنيها بالخارج كرافعة للتنمية المحلية."}, "contactNom": "Omar Daoud", "contactRole": {"fr": "Conseiller technique senior, POMIRE", "en": "Senior Technical Advisor, POMIRE", "ar": "مستشار تقني أقدم، POMIRE"}, "contactMail": "omar.daoud@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/pomire-01-l-ecosysteme-entrepreneu.jpg"}]}, {"id": "SoDer", "axe": "1", "titre": {"fr": "Rapprocher le développement des régions", "en": "Bringing development closer to the regions", "ar": "تقريب التنمية من الجهات"}, "acronyme": "SoDeR", "titreLong": {"fr": "Solutions décentralisées pour le développement régional", "en": "Promoting regionalisation in Morocco to bring social and economic progress", "ar": "حلول لامركزية من أجل التنمية الجهوية"}, "mission": {"fr": "Le projet appuie la mise en œuvre de la régionalisation avancée au Maroc afin de favoriser le progrès économique et social et de renforcer la participation des citoyens et de la société civile, en particulier les femmes et les jeunes.", "en": "The project supports the implementation of advanced regionalisation in Morocco in order to foster economic and social progress and strengthen the participation of citizens and civil society, particularly women and young people.", "ar": "يدعم المشروع تنزيل الجهوية المتقدمة بالمغرب من أجل تعزيز التقدم الاقتصادي والاجتماعي وتقوية مشاركة المواطنين والمجتمع المدني، لا سيما النساء والشباب."}, "partenaire": "Ministère de l'Intérieur; DGCT; Conseil régional Marrakech-Safi; Guelmim Oued Noun; Souss-Massa", "periode": "2021 - 2026", "img": "images/projets/soder.jpg", "drive": "", "initiatives": [{"levier": {"fr": "Renforcement de capacités"}, "icon": "📊", "titre": {"fr": "Décider à partir des données du territoire", "en": "Deciding on the basis of territorial data", "ar": "اتخاذ القرار انطلاقاً من معطيات المجال"}, "accroche": {"fr": "Donner aux régions les outils pour planifier leur développement à partir de faits, pas d'intuitions.", "en": "Giving regions the tools to plan their development on facts, not hunches.", "ar": "تزويد الجهات بأدوات لتخطيط تنميتها انطلاقاً من الوقائع لا من الحدس."}, "defi": {"fr": "Avec la régionalisation avancée, les régions héritent de nouvelles responsabilités de développement, mais leurs élus et cadres manquent souvent de données fiables et des compétences pour les analyser, ce qui fragilise la qualité des décisions.", "en": "With advanced regionalisation, regions inherit new development responsibilities, but their elected officials and managers often lack reliable data and the skills to analyse it, which weakens the quality of decisions.", "ar": "مع الجهوية المتقدمة، ترث الجهات مسؤوليات تنموية جديدة، لكن منتخبيها وأطرها كثيراً ما يفتقرون إلى معطيات موثوقة وإلى مهارات تحليلها، مما يُضعف جودة القرارات."}, "reponse": {"fr": "SoDeR renforce les compétences des élus et cadres en analyse de données, crée une cellule de coordination régionale dédiée à l'information territoriale, et développe une base de données statistiques accessible pour suivre et évaluer le développement régional.", "en": "SoDeR strengthens the data analysis skills of elected officials and managers, sets up a regional coordination unit dedicated to territorial information, and develops an accessible statistical database to monitor and evaluate regional development.", "ar": "يعزز مشروع SoDeR مهارات المنتخبين والأطر في تحليل المعطيات، ويُحدث خلية تنسيق جهوية مخصصة للمعلومة المجالية، ويطور قاعدة معطيات إحصائية ميسَّرة الولوج لتتبع وتقييم التنمية الجهوية."}, "declicType": "", "chiffre": "", "legchiffre": {"fr": "", "en": "", "ar": ""}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Marrakech-Safi, Souss-Massa, Guelmim-Oued Noun", "en": "Marrakech Safi, Souss Massa, Guelmim Oued Noun", "ar": "مراكش آسفي، سوس ماسة، كلميم وادي نون"}, "statut": {"fr": "Achevé", "en": "Completed", "ar": "منجز"}, "transposable": {"fr": "Le modèle, une cellule de données régionale plus la montée en compétence des élus, est réplicable dans toute région qui veut piloter son développement sur des bases factuelles.", "en": "The model, a regional data unit plus the capacity building of elected officials, is replicable in any region wishing to steer its development on a factual basis.", "ar": "النموذج، خلية معطيات جهوية إلى جانب الرفع من كفاءة المنتخبين، قابل للتكرار في أي جهة ترغب في قيادة تنميتها على أساس وقائعي."}, "contactNom": "", "contactRole": {"fr": "", "en": "", "ar": ""}, "contactMail": "", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/soder-01-decider-a-partir-des-don.jpg"}, {"levier": {"fr": "Gouvernance"}, "icon": "🗣️", "titre": {"fr": "La participation citoyenne dans la planification régionale", "en": "Citizen participation in regional planning", "ar": "المشاركة المواطنة في التخطيط الجهوي"}, "accroche": {"fr": "Faire entrer la voix des citoyens, et notamment des femmes, dans la planification du développement régional.", "en": "Bringing the voice of citizens, and women in particular, into regional development planning.", "ar": "إدخال صوت المواطنين، ولا سيما النساء، في تخطيط التنمية الجهوية."}, "defi": {"fr": "La planification régionale restait éloignée des citoyens, avec une participation limitée des instances consultatives et une faible prise en compte de l'égalité des genres dans les décisions.", "en": "Regional planning remained distant from citizens, with limited participation of consultative bodies and weak consideration of gender equality in decisions.", "ar": "ظل التخطيط الجهوي بعيداً عن المواطنين، بمشاركة محدودة للهيئات الاستشارية وضعف في مراعاة المساواة بين الجنسين في القرارات."}, "reponse": {"fr": "SoDeR a contribué au renforcement la participation et la coopération entre l'administration régionale et les élus, met en place des plateformes d'échange numériques, encourage le suivi des Plans de Développement Régionaux et organise des concours de créativité pour mobiliser les jeunes autour de la citoyenneté.", "en": "SoDeR contributed to strengthening participation and cooperation between the regional administration and elected officials, sets up digital exchange platforms, encourages the monitoring of Regional Development Plans and organises creativity competitions to engage young people around citizenship.", "ar": "ساهم مشروع SoDeR في تعزيز المشاركة والتعاون بين الإدارة الجهوية والمنتخبين، وأرسى منصات رقمية للتبادل، وشجّع تتبع مخططات التنمية الجهوية، ونظّم مسابقات للإبداع لتعبئة الشباب حول المواطنة."}, "declicType": "", "chiffre": "", "legchiffre": {"fr": "", "en": "", "ar": ""}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Marrakech-Safi, Souss-Massa, Guelmim-Oued Noun", "en": "Marrakech Safi, Souss Massa, Guelmim Oued Noun", "ar": "مراكش آسفي، سوس ماسة، كلميم وادي نون"}, "statut": {"fr": "Achevé", "en": "Completed", "ar": "منجز"}, "transposable": {"fr": "L'approche, des plateformes numériques de concertation plus une planification sensible au genre, est transposable à toute collectivité voulant rapprocher décision publique et citoyens.", "en": "The approach, digital consultation platforms plus gender sensitive planning, is transferable to any local authority wishing to bring public decision making closer to citizens.", "ar": "المقاربة، منصات رقمية للتشاور إلى جانب تخطيط مراعٍ للنوع، قابلة للنقل إلى أي جماعة ترغب في تقريب القرار العمومي من المواطنين."}, "contactNom": "", "contactRole": {"fr": "", "en": "", "ar": ""}, "contactMail": "mailto:nils.huhn@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/soder-02-la-participation-citoyen.jpg"}]}]}, {"id": "eco", "theme": "eco", "num": "02", "title": {"fr": "Transition environnementale", "en": "Environmental transition", "ar": "الانتقال البيئي"}, "projects": [{"id": "Urba-Clima", "axe": "2", "titre": {"fr": "Adapter les villes au changement climatique", "en": "Adapting cities to climate change", "ar": "تكييف المدن مع التغير المناخي"}, "acronyme": "Urba-Clima", "titreLong": {"fr": "Adaptation urbaine au changement climatique au Maghreb (UrbA-CliMa)", "en": "Urban Adaptation to Climate Change in the \nMaghreb (UrbA-CliMa)", "ar": "التكيف الحضري مع التغير المناخي بالمغرب الكبير (UrbA-CliMa)"}, "mission": {"fr": "e projet régional UrbA-CliMa accompagne des villes du Maghreb (Maroc, Algérie, Tunisie) pour mieux les outiller face aux impacts du changement climatique.  Il appuie ensuite les villes dans la mise en œuvre de ces plans et la mobilisation de financements, tout en favorisant la diffusion régionale de bonnes pratiques.", "en": "The regional project UrbA-CliMa supports cities in the Maghreb (Morocco, Algeria, Tunisia) to better equip them to face the impacts of climate change. It then supports the cities in implementing these plans and mobilising financing, while fostering the regional dissemination of good practices.", "ar": "يواكب المشروع الجهوي UrbA-CliMa مدناً بالمغرب الكبير (المغرب، الجزائر، تونس) لتزويدها بأدوات أفضل لمواجهة آثار التغير المناخي. ثم يدعم المدن في تنفيذ هذه المخططات وتعبئة التمويلات، مع تشجيع النشر الجهوي للممارسات الجيدة."}, "partenaire": "Ministère de l'Intérieur", "periode": "2024-2027", "img": "images/projets/urba-clima.jpg", "drive": "", "initiatives": [{"levier": {"fr": "Renforcement de capacités"}, "icon": "•", "titre": {"fr": "Appui à la conception de bandes cyclables à Oujda", "en": "Support for the design of cycle lanes in Oujda", "ar": "دعم تصميم المسارات الهوائية بوجدة"}, "accroche": {"fr": "Promouvoir la mobilité douce et la pratique du vélo urbain dans la ville d'Oujda.", "en": "Promoting soft mobility and th practice of urban cycling in the city of Oujda.", "ar": "تشجيع التنقل الناعم وممارسة الدراجة الحضرية في مدينة وجدة."}, "defi": {"fr": "Faute d'infrastructures dédiées aux cyclistes, la part modale des deux-roues, en particulier du vélo, est estimée à 2 % à l'échelle de la ville. Pourtant, la topographie plane d'Oujda rend la pratique du vélo aisée.", "en": "Due to the lack of dedicated infrastructure for cyclists, the modal  share of two-wheeled vehicles, particularly bicycles, is estimated \nat 2% at the city level. However, the city’s flat topography makes cycling easy.", "ar": "بسبب غياب بنيات تحتية مخصصة للدراجين, تُقدَّر الحصة النمطية للعجلتين, ولا سيما الدراجة, بنحو 2% على صعيد المدينة. ومع ذلك, فإن التضاريس المنبسطة لوجدة تجعل ممارسة الدراجة ميسورة."}, "reponse": {"fr": "Le Plan de Déplacements Urbains (PDMU) d'Oujda prévoit la mise en œuvre d'un plan complet de pistes et bandes cyclables. Le tronçon de 4 km du boulevard M'barek Bekkay Lahbil a été retenu en priorité comme zone pilote. L'étude du projet a été élaborée par la ville d'Oujda en coopération avec l'arrondissement de Böblingen en Allemagne. Le projet a accompagné la ville d'Oujda par un renforcement des capacités sur la mobilité durable et une étude complète sur l'installation du projet.", "en": "Oujda’s Master Plan for \nUrban Mobility (PDMU) includes the implementation of a comprehensive plan for bicycle lanes and paths. The 4 km section of \nBoulevard M’barek Bekkay Lahbil has been prioritised as a pilot area. The project study has been developed by the city of Oujda in cooperation with the district of Böblingen in Germany. The project supported the city of Oujda through capacity building on sustainable mobility and a comprehensive study study on the installation of the project.", "ar": "يتضمن مخطط التنقلات الحضرية (PDMU) لوجدة تنفيذ مخطط شامل للمسارات والمسالك الهوائية. وقد تم اعتماد مقطع بطول 4 كلم من شارع امبارك بكاي لحبيل كأولوية ومنطقة نموذجية. وأعدّت دراسة المشروع مدينةُ وجدة بتعاون مع مقاطعة بوبلينغن بألمانيا. وقد واكب المشروع مدينة وجدة عبر تعزيز القدرات في مجال التنقل المستدام ودراسة شاملة حول إنجاز المشروع."}, "declicType": "number", "chiffre": "203 000 EUR", "legchiffre": {"fr": "montant mobilisé pour la conception des bandes cyclables", "en": "One challenge faced by the project was budgetary requierments. The municipality is currently seeking third-party funding for the project.", "ar": "المبلغ المعبأ لتصميم المسارات الهوائية"}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Oujda", "en": "Oujda", "ar": "وجدة"}, "statut": {"fr": "Achevé", "en": "Completed", "ar": "منجز"}, "transposable": {"fr": "Cette approche de promotion de la mobilité durable est transposable.", "en": "This approach to promoting sustainable mobility is transferable.", "ar": "هذه المقاربة لإنعاش التنقل المستدام قابلة للنقل."}, "contactNom": "Carole Fappani", "contactRole": {"fr": "Conseillère technique principale, Urba-Clima", "en": "Principal Technical Advisor, Urba Clima", "ar": "المستشارة التقنية الرئيسية، أوربا كليما"}, "contactMail": "carole.fappani@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/urba-clima-01-appui-a-la-conception-de.jpg"}, {"levier": {"fr": "Assistance technique"}, "icon": "•", "titre": {"fr": "Planification du réaménagement du parc Mesbahiyat à Mohammedia", "en": "Planning the redevelopment of Mesbahiyat Park in Mohammedia", "ar": "التخطيط لإعادة تهيئة حديقة مصباحيات بالمحمدية"}, "accroche": {"fr": "Redonner vie à un parc urbain de 10 hectares, abandonné depuis 2015, pour réconcilier la ville avec son patrimoine forestier.", "en": "Bringing a 10 hectare urban park, abandoned since 2015, back to life to reconcile the city with its forest heritage.", "ar": "إحياء حديقة حضرية مساحتها 10 هكتارات، مهملة منذ 2015، للمصالحة بين المدينة وإرثها الغابوي."}, "defi": {"fr": "Mohammedia, ancienne « ville des fleurs », avait laissé à l'abandon depuis 2015 un parc de 10 hectares en pleine forêt, dégradé et déconnecté de la vie urbaine. Surtout, la commune ne disposait pas des prérogatives pour intervenir (le site relevait de l'agence des forêts) ce qui imposait un accord préalable avant même de pouvoir planifier.", "en": "Mohammedia, the former “city of flowers”, had left a 10 hectare park in the middle of a forest abandoned since 2015, degraded and disconnected from urban life. Above all, the municipality lacked the prerogatives to intervene (the site came under the forestry agency), which required a prior agreement before any planning could even begin.", "ar": "تركت المحمدية، « مدينة الأزهار » سابقاً، حديقة مساحتها 10 هكتارات وسط غابة مهملة منذ 2015، متدهورة ومنفصلة عن الحياة الحضرية. والأهم أن الجماعة لم تكن تملك الصلاحيات للتدخل (إذ يخضع الموقع لوكالة الغابات)، مما استلزم اتفاقاً مسبقاً قبل الشروع في أي تخطيط."}, "reponse": {"fr": "Avec l'appui du projet, la commune a réalisé en 2023 une étude complète de réaménagement : diagnostic du site, sélection d'espèces végétales adaptées au climat local et économes en eau, et plan paysager intégrant biodiversité, espaces de jeux et un lieu de détente pensé pour les femmes du quartier.\nL'étude a aussi posé le modèle économique et de gestion du parc (estimation des coûts, partenaires potentiels, scénarios de gestion durable) pour garantir sa viabilité.\nLe partenariat avec la ville allemande de Trèves a nourri la démarche par une dizaine d'échanges et voyages d'étude sur les choix de végétation.", "en": "With the project's support, the municipality carried out in 2023 a comprehensive redevelopment study: site diagnosis, selection of plant species suited to the local climate and economical in water, and a landscape plan integrating biodiversity, play areas and a relaxation space designed for the women of the neighbourhood. The study also set out the park's economic and management model (cost estimates, potential partners, sustainable management scenarios) to ensure its viability. The partnership with the German city of Trier nourished the process through around ten exchanges and study trips on plant choices.", "ar": "بدعم من المشروع، أنجزت الجماعة سنة 2023 دراسة شاملة لإعادة التهيئة: تشخيص للموقع، واختيار لأصناف نباتية ملائمة للمناخ المحلي وموفِّرة للماء، وتصميم للمشهد يدمج التنوع البيولوجي وفضاءات للعب وفضاء للاستجمام مُعَدّ لنساء الحي. كما حددت الدراسة النموذج الاقتصادي والتدبيري للحديقة (تقدير الكلفة، الشركاء المحتملون، سيناريوهات التدبير المستدام) لضمان استمراريتها. وأغنت الشراكة مع مدينة ترير الألمانية المسار عبر نحو عشرة لقاءات ورحلات دراسية حول اختيار النباتات."}, "declicType": "number", "chiffre": "10 ha", "legchiffre": {"fr": "La surface du parc forestier en cours de revalorisation", "en": "the area of the forest park currently being rehabilitated", "ar": "مساحة الحديقة الغابوية قيد إعادة التثمين"}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Mohammedia", "en": "Mohammedia", "ar": "المحمدية"}, "statut": {"fr": "Achevé", "en": "Completed", "ar": "منجز"}, "transposable": {"fr": "La démarche (sécuriser l'accord inter-institutionnel, puis planifier un réaménagement écologique avec modèle de gestion durable) est transposable à toute commune disposant d'un foncier vert sous-exploité.", "en": "The approach (securing the inter institutional agreement, then planning an ecological redevelopment with a sustainable management model) is transferable to any municipality with under used green land.", "ar": "المقاربة (تأمين الاتفاق بين المؤسسات، ثم التخطيط لإعادة تهيئة إيكولوجية مع نموذج تدبير مستدام) قابلة للنقل إلى أي جماعة تتوفر على وعاء عقاري أخضر غير مستغل."}, "contactNom": "Carole Fappani", "contactRole": {"fr": "Conseillère technique principale, Urba-Clima", "en": "Principal Technical Advisor, Urba Clima", "ar": "المستشارة التقنية الرئيسية، أوربا كليما"}, "contactMail": "carole.fappani@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/urba-clima-02-planification-du-reamena.jpg"}, {"levier": {"fr": "Assistance technique"}, "icon": "•", "titre": {"fr": "Le Centre Climat et Environnement à Chefchaouen", "en": "The Climate and Environment Centre in Chefchaouen", "ar": "مركز المناخ والبيئة بشفشاون"}, "accroche": {"fr": "Doter une « ville écologique » d'un Centre Climat et Environnement pour ancrer l'éducation au climat dans la vie locale.", "en": "Equipping an “eco city” with a Climate and Environment Centre to anchor climate education in local life.", "ar": "تزويد « مدينة إيكولوجية » بمركز للمناخ والبيئة لترسيخ التربية المناخية في الحياة المحلية."}, "defi": {"fr": "Chefchaouen, engagée comme « ville écologique » depuis 2010, voulait un lieu dédié pour éduquer et sensibiliser au climat, mais ne disposait ni du personnel de gestion, ni d'un financement pérenne pour faire vivre un tel centre. Il fallait donc concevoir le centre et son modèle de viabilité avant même de l'ouvrir durablement.", "en": "Chefchaouen, committed as an “eco city” since 2010, wanted a dedicated venue to educate and raise awareness about the climate, but had neither the management staff nor the lasting funding to keep such a centre running. The centre and its viability model therefore had to be designed before it could even open sustainably.", "ar": "كانت شفشاون، الملتزمة بصفتها « مدينة إيكولوجية » منذ 2010، ترغب في فضاء مخصص للتربية والتحسيس بشأن المناخ، لكنها لم تكن تملك لا الموارد البشرية للتدبير ولا تمويلاً دائماً لإدامة مثل هذا المركز. لذا كان لا بد من تصور المركز ونموذج استمراريته قبل افتتاحه بشكل دائم."}, "reponse": {"fr": "Avec l'appui du projet, la commune a réalisé une étude de préfiguration et de programmation du CCE : définition des thématiques, du public cible, des partenaires, et élaboration d'un plan d'action faisant office de feuille de route.Le projet a aussi conçu un mode de gestion pour assurer la pérennité du centre, et a accompagné le lancement concret de premières activités (formation environnementale pour des élèves, conférence climat). L'expérience de la ville allemande de Trèves en éducation environnementale a nourri la démarche via une dizaine de voyages d'étude et de conférences virtuelles.", "en": "With the project's support, the municipality carried out a pre design and programming study for the Centre: defining the themes, the target audiences and the partners, and drawing up an action plan serving as a roadmap. The project also designed a management model to ensure the centre's sustainability, and supported the concrete launch of initial activities (environmental training for pupils, a climate conference). The German city of Trier's experience in environmental education nourished the process through around ten study trips and virtual conferences.", "ar": "بدعم من المشروع، أنجزت الجماعة دراسة لتهيئة وبرمجة المركز: تحديد المحاور والجمهور المستهدف والشركاء، وإعداد مخطط عمل يقوم مقام خارطة طريق. كما صمم المشروع نموذجاً للتدبير لضمان استمرارية المركز، وواكب الانطلاقة الفعلية لأولى الأنشطة (تكوين بيئي للتلاميذ، مؤتمر حول المناخ). وأغنت تجربة مدينة ترير الألمانية في التربية البيئية المسار عبر نحو عشر رحلات دراسية ومؤتمرات افتراضية."}, "declicType": "quote", "chiffre": "", "legchiffre": {"fr": "", "en": "", "ar": ""}, "citation": {"fr": "1er centre climat de proximité au Maroc, une première à Chefchaouen", "en": "1st neighbourhood climate centre in Morocco, a first for Chefchaouen", "ar": "أول مركز قُربي للمناخ بالمغرب، سابقة في شفشاون"}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Chefchaouen", "en": "Chefchaouen", "ar": "شفشاون"}, "statut": {"fr": "Achevé", "en": "Completed", "ar": "منجز"}, "transposable": {"fr": "Le modèle est transposable à toute commune souhaitant ancrer durablement la sensibilisation environnementale.", "en": "The model is transferable to any municipality wishing to sustainably anchor environmental awareness.", "ar": "النموذج قابل للنقل إلى أي جماعة ترغب في ترسيخ التحسيس البيئي بشكل مستدام."}, "contactNom": "Carole Fappani", "contactRole": {"fr": "Conseillère technique principale, Urba-Clima", "en": "Principal Technical Advisor, Urba Clima", "ar": "المستشارة التقنية الرئيسية، أوربا كليما"}, "contactMail": "carole.fappani@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/urba-clima-03-le-centre-climat-et-envi.jpg"}, {"levier": {"fr": "Assistance technique"}, "icon": "•", "titre": {"fr": "La conception des systèmes \nd’arrosage adaptés aux espaces verts à Tétouan", "en": "Designing irrigation systems suited to green spaces in Tetouan", "ar": "تصميم أنظمة السقي الملائمة للمساحات الخضراء بتطوان"}, "accroche": {"fr": "Repenser l'arrosage des espaces verts d'une ville pour cesser de gaspiller l'eau potable face à la sécheresse.", "en": "Rethinking a city's green space irrigation to stop wasting drinking water in the face of drought.", "ar": "إعادة التفكير في سقي المساحات الخضراء بالمدينة لوقف هدر الماء الصالح للشرب في مواجهة الجفاف."}, "defi": {"fr": "À Tétouan, l'expansion urbaine a fait exploser la consommation d'eau d'arrosage, de 12 655 m³ en 2015 à 46 750 m³ en 2020,  pendant que la sécheresse récurrente épuisait les ressources. La ville arrosait ses espaces verts à l'eau potable, une pratique devenue intenable dans un contexte de stress hydrique.", "en": "In Tetouan, urban expansion caused irrigation water consumption to soar, from 12,655 m³ in 2015 to 46,750 m³ in 2020, while recurrent drought depleted resources. The city was irrigating its green spaces with drinking water, a practice that had become untenable in a context of water stress.", "ar": "في تطوان، أدى التوسع الحضري إلى ارتفاع صاروخي في استهلاك ماء السقي، من 12.655 م³ سنة 2015 إلى 46.750 م³ سنة 2020، فيما كان الجفاف المتكرر يستنزف الموارد. وكانت المدينة تسقي مساحاتها الخضراء بالماء الصالح للشرب، وهي ممارسة أصبحت غير قابلة للاستمرار في سياق الإجهاد المائي."}, "reponse": {"fr": "La commune a réalisé un inventaire cartographié complet de ses espaces verts et de leurs besoins en eau, espace par espace. Sur cette base, le projet a produit un cahier de préconisations pour des systèmes d'arrosage adaptés à chaque type d'espace, et identifié des ressources alternatives à l'eau potable : eaux pluviales, eaux usées traitées, eaux de l'Oued Martil. L'approche privilégie l'enrichissement de la palette végétale existante avec des espèces peu gourmandes en eau, plutôt qu'une refonte coûteuse.", "en": "The municipality carried out a complete mapped inventory of its green spaces and their water needs, space by space. On this basis, the project produced a set of recommendations for irrigation systems suited to each type of space, and identified resources alternative to drinking water: rainwater, treated wastewater and water from the Martil wadi. The approach favours enriching the existing plant palette with low water species, rather than a costly overhaul.", "ar": "أنجزت الجماعة جرداً مفصلاً ومُخرطَناً لمساحاتها الخضراء وحاجياتها من الماء، فضاءً فضاءً. وعلى هذا الأساس، أنتج المشروع دفتر توصيات لأنظمة سقي ملائمة لكل نوع من الفضاءات، وحدد موارد بديلة عن الماء الصالح للشرب: مياه الأمطار والمياه العادمة المعالَجة ومياه وادي مارتيل. وتفضّل المقاربة إغناء التشكيلة النباتية القائمة بأصناف قليلة الاستهلاك للماء، عوض إعادة تصميم مكلفة."}, "declicType": "number", "chiffre": "3", "legchiffre": {"fr": "sources alternatives mobilisées pour remplacer l'eau potable (eaux pluviales, eaux usées traitées, Oued Martil)", "en": "alternative sources mobilised to replace drinking water (rainwater, treated wastewater, Martil wadi)", "ar": "مصادر بديلة تمت تعبئتها لتعويض الماء الصالح للشرب (مياه الأمطار، المياه العادمة المعالَجة، وادي مارتيل)"}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Tetouan", "en": "Tetouan", "ar": "تطوان"}, "statut": {"fr": "Achevé", "en": "Completed", "ar": "منجز"}, "transposable": {"fr": "La méthode est transposable à toute ville confrontée au stress hydrique.", "en": "The method is transferable to any city facing water stress.", "ar": "المنهجية قابلة للنقل إلى أي مدينة تواجه الإجهاد المائي."}, "contactNom": "Carole Fappani", "contactRole": {"fr": "Conseillère technique principale, Urba-Clima", "en": "Principal Technical Advisor, Urba Clima", "ar": "المستشارة التقنية الرئيسية، أوربا كليما"}, "contactMail": "carole.fappani@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/urba-clima-04-la-conception-des-system.jpg"}]}, {"id": "EccEauUrbain", "axe": "2", "titre": {"fr": "Gérer l'eau autrement dans les villes", "en": "Managing urban water differently", "ar": "تدبير الماء بشكل مختلف في المدن"}, "acronyme": "Éco. circ. de l'eau", "titreLong": {"fr": "Faciliter les pratiques d’économie circulaire de l’eau en milieu urbain", "en": "Facilitating circular water economy practices in urban areas", "ar": "تيسير ممارسات الاقتصاد الدائري للماء في الوسط الحضري"}, "mission": {"fr": "Le projet accompagne le Maroc dans la transition vers une gestion de l'eau en milieu urbain davantage axée sur l'économie circulaire et la résilience au changement climatique, face à des pénuries hydriques croissantes. Il conseille les acteurs nationaux, régionaux et locaux pour intégrer ces pratiques à la planification urbaine, renforce les capacités de deux villes pilotes et améliore la disponibilité de données numériques sur l'eau, tout en tenant compte de l'égalité de genre et de l'inclusion sociale.", "en": "The project supports Morocco in the transition toward urban water management that is more focused on the circular economy and resilience to climate change, in the face of growing water shortages. It advises national, regional and local actors on integrating these practices into urban planning, builds the capacities of two pilot cities and improves the availability of digital water data, while taking gender equality and social inclusion into account.", "ar": "يواكب المشروع المغرب في الانتقال نحو تدبير للماء في الوسط الحضري أكثر استناداً إلى الاقتصاد الدائري والقدرة على الصمود في وجه التغير المناخي، في مواجهة تزايد ندرة الماء. ويقدم المشورة للفاعلين الوطنيين والجهويين والمحليين لإدماج هذه الممارسات في التخطيط الحضري، ويعزز قدرات مدينتين نموذجيتين، ويحسّن توافر المعطيات الرقمية حول الماء، مع مراعاة المساواة بين الجنسين والإدماج الاجتماعي."}, "partenaire": "Ministère de l’Aménagement du Territoire National, de \nl’Urbanisme, de l’Habitat et la Politique de la ville", "periode": "2023-2026", "img": "images/projets/eau-circulaire.jpg", "drive": "", "initiatives": [{"levier": {"fr": "Renforcement de capacités"}, "icon": "•", "titre": {"fr": "Recueil de solutions pour les gouvernements locaux et régionaux", "en": "A compendium of solutions for local and regional governments", "ar": "دليل حلول للحكومات المحلية والجهوية"}, "accroche": {"fr": "12 initiatives concrètes qui démontrent comment les approches circulaires en matière de gestion de l'eau peuvent renforcert la résilience urbaine, améliorer la sécurité hydrique et soutenir le développement durable. Elles couvrent un large évential de contextes allan des éco-quartiers et villes nouvelles aux projetes de réutilisation des eaux usées à des fins industrielles ou autres ainsi que les initiatives de collecte des eaux pluviables.", "en": "12 concrete initiatives that show how circular approaches to water management can strengthen urban resilience, improve water security and support sustainable development. They cover a wide range of contexts, from eco neighbourhoods and new cities to wastewater reuse for industrial and other purposes, as well as rainwater harvesting initiatives.", "ar": "12 مبادرة ملموسة تبيّن كيف يمكن للمقاربات الدائرية في تدبير الماء أن تعزز الصمود الحضري وتحسّن الأمن المائي وتدعم التنمية المستدامة. وتغطي مجالات واسعة، من الأحياء الإيكولوجية والمدن الجديدة إلى مشاريع إعادة استعمال المياه العادمة لأغراض صناعية وغيرها، إضافة إلى مبادرات تجميع مياه الأمطار."}, "defi": {"fr": "Le Maroc fait partie des pays confrontés au stress hydrique, ses villes étant au cœur de la crise. La disponibilité en eau douce renouvelable par habitant étant estimée à 606 m³ d'eau par an – un chiffre qui devrait tomber à 510 m³ d'ici 2050 – bien en dessous du seuil international de 1 700 m³ par personne et par an, tel que défini par l'indicateur de stress hydrique de Falkenmark.", "en": "Morocco is among the countries facing water stress, with its cities at the heart of the crisis. Renewable freshwater availability per capita is estimated at 606 m³ of water per year, a figure expected to fall to 510 m³ by 2050, well below the international threshold of 1,700 m³ per person per year as defined by the Falkenmark water stress indicator.", "ar": "يُعد المغرب من البلدان التي تواجه الإجهاد المائي، حيث تقع مدنه في صلب الأزمة. ويُقدَّر نصيب الفرد من المياه العذبة المتجددة بنحو 606 م³ سنوياً، وهو رقم يُتوقع أن ينخفض إلى 510 م³ بحلول 2050، أي دون العتبة الدولية البالغة 1700 م³ للفرد سنوياً وفق مؤشر فالكنمارك للإجهاد المائي."}, "reponse": {"fr": "Ce recueil présente des enseignements particulièrement pertinents pour les villes marocaines : Agir tôt et intégrer la planification de l'eau ; créer des environnements réglementaires favorables, favoriser les investissements privés sous contrôle public; donner la priorité à la communication et à l'éducation; investir dans les capacités locales.", "en": "This compendium presents lessons that are particularly relevant for Moroccan cities: act early and integrate water planning; create enabling regulatory environments; encourage private investment under public oversight; prioritise communication and education; and invest in local capacities.", "ar": "يقدم هذا الدليل دروساً بالغة الأهمية للمدن المغربية: التحرك مبكراً وإدماج تخطيط الماء؛ وخلق بيئات تنظيمية محفِّزة؛ وتشجيع الاستثمار الخاص تحت إشراف عمومي؛ وإعطاء الأولوية للتواصل والتربية؛ والاستثمار في القدرات المحلية."}, "declicType": "", "chiffre": "", "legchiffre": {"fr": "", "en": "", "ar": ""}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "", "en": "", "ar": ""}, "statut": {"fr": "", "en": "", "ar": ""}, "transposable": {"fr": "", "en": "", "ar": ""}, "contactNom": "", "contactRole": {"fr": "", "en": "", "ar": ""}, "contactMail": "mailto:carole.fappani@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/eau-circulaire-01-recueil-de-solutions-pou.jpg"}, {"levier": {"fr": "Assistance technique"}, "icon": "•", "titre": {"fr": "Vision Marrakech 2050", "en": "Marrakech 2050 Vision", "ar": "رؤية مراكش 2050"}, "accroche": {"fr": "Vision stratégique pour la résilience urbaine de Marrakech fondée sur l'économie circulaire de l'eau.", "en": "A strategic vision for Marrakech's urban resilience grounded in the circular water economy.", "ar": "رؤية استراتيجية لصمود مراكش الحضري قائمة على الاقتصاد الدائري للماء."}, "defi": {"fr": "Les villes du Maroc sont confrontées à des défis majeurs liés au  changement climatique. \nAvec aujourd’hui plus de la moitié  de la population du pays vivant en  milieu urbain, ce chiffre devrait  atteindre 73,6% d’ici 2050. Cette \ncroissance urbaine pose des défis  économiques, environnementaux et sociaux à court et moyen terme.  De plus, les températures moyennes  ont augmenté de 1° à 3°C depuis  les années 1960 dans tout le pays, \navec des projections indiquant une tendance à la hausse jusqu’en 2050. Les impacts de ces changements  sont de plus en plus ressentis à \nl’échelle locale, plaçant ainsi les  villes marocaines au cœur de la lutte  contre le changement climatique.", "en": "Morocco's cities face major challenges linked to climate change. With more than half of the country's population now living in urban areas, this figure is expected to reach 73.6% by 2050. This urban growth poses economic, environmental and social challenges in the short and medium term. Moreover, average temperatures have risen by 1 to 3°C since the 1960s across the country, with projections indicating an upward trend through to 2050. The impacts of these changes are increasingly felt at local level, placing Moroccan cities at the heart of the fight against climate change.", "ar": "تواجه مدن المغرب تحديات كبرى مرتبطة بالتغير المناخي. ومع كون أكثر من نصف ساكنة البلاد تعيش اليوم في الوسط الحضري، يُتوقع أن تبلغ هذه النسبة 73,6% بحلول 2050. ويطرح هذا النمو الحضري تحديات اقتصادية وبيئية واجتماعية على المديين القصير والمتوسط. كما ارتفعت درجات الحرارة المتوسطة بين 1 و3 درجات مئوية منذ الستينيات في مختلف أنحاء البلاد، مع توقعات تشير إلى منحى تصاعدي حتى 2050. وتُستشعر آثار هذه التغيرات بشكل متزايد على المستوى المحلي، مما يضع المدن المغربية في صلب مكافحة التغير المناخي."}, "reponse": {"fr": "Accompagnée par le GIZ et le MATNUHPV, la Commune de Marrakech s'est dotée d'une vision pour renforcer la résilience de la ville au changement climatique. Ce document témoigne également de leurs efforts pour atteindre les priorités de développement et répondre aux aspirations des citoyens et citoyennes pour la question du stress  hydrique et les changements climatiques", "en": "Supported by GIZ and the MATNUHPV, the Municipality of Marrakech has adopted a vision to strengthen the city's resilience to climate change. This document also reflects its efforts to meet development priorities and respond to citizens' aspirations regarding water stress and climate change.", "ar": "بمواكبة من الوكالة الألمانية للتعاون الدولي ووزارة إعداد التراب الوطني والتعمير والإسكان وسياسة المدينة، اعتمدت جماعة مراكش رؤية لتعزيز صمود المدينة في وجه التغير المناخي. كما يعكس هذا الوثيقة جهودها لبلوغ أولويات التنمية والاستجابة لتطلعات المواطنين والمواطنات بشأن الإجهاد المائي والتغيرات المناخية."}, "declicType": "number", "chiffre": "", "legchiffre": {"fr": "", "en": "", "ar": ""}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Commune de Marrakech", "en": "Municipality of Marrakech", "ar": "جماعة مراكش"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "Cette approche est transposable dans les zones qui souffrent d'une raréfaction de l'eau.", "en": "This approach is transferable to areas suffering from water scarcity.", "ar": "هذه المقاربة قابلة للنقل إلى المناطق التي تعاني من ندرة الماء."}, "contactNom": "Nils Huhn", "contactRole": {"fr": "Conseiller Technique Principal, EccEauUrbain", "en": "Principal Technical Advisor, Urban Water Circular Economy", "ar": "المستشار التقني الرئيسي، الاقتصاد الدائري للماء الحضري"}, "contactMail": "nils.huhn@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/eau-circulaire-02-vision-marrakech-2050.jpg"}, {"levier": {"fr": "Assistance technique"}, "icon": "•", "titre": {"fr": "Vision Tanger 2050", "en": "Tangier 2050 Vision", "ar": "رؤية طنجة 2050"}, "accroche": {"fr": "Vision stratégique pour une résilience urbaine fondée sur l'économie circulaire de l'eau", "en": "A strategic vision for urban resilience grounded in the circular water economy.", "ar": "رؤية استراتيجية لصمود حضري قائم على الاقتصاد الدائري للماء."}, "defi": {"fr": "L’urbanisation rapide, l’imperméabilisation croissante  des sols, la pression sur les milieux naturels et l’intensification des phénomènes climatiques fragilisent progressivement le fonctionnement hydrologique du territoire. Les épisodes d’inondation récurrents, la  dégradation progressive des oueds et la pression croissante sur les ressources en eau illustrent les limites  du modèle urbain actuel et soulignent la nécessité de repenser la relation entre la ville et son cycle de l’eau.", "en": "Rapid urbanisation, the growing sealing of soils, pressure on natural environments and the intensification of climate phenomena are progressively weakening the territory's hydrological functioning. Recurrent flooding, the gradual degradation of the wadis and growing pressure on water resources illustrate the limits of the current urban model and underline the need to rethink the relationship between the city and its water cycle.", "ar": "يؤدي التحضر السريع، والإغلاق المتزايد للتربة، والضغط على الأوساط الطبيعية، وتكثّف الظواهر المناخية، إلى إضعاف تدريجي للأداء الهيدرولوجي للمجال. وتجسّد فيضانات متكررة، والتدهور التدريجي للأودية، والضغط المتنامي على الموارد المائية، حدود النموذج الحضري الحالي، وتبرز الحاجة إلى إعادة التفكير في العلاقة بين المدينة ودورتها المائية."}, "reponse": {"fr": "La Vision Tanger 2050 – « Eau circulaire, métropole résiliente » propose une nouvelle manière de penser le développement urbain de la métropole. Elle place l’eau au cœur de la transformation du  territoire, non plus seulement comme une ressource à mobiliser ou une contrainte à gérer, mais comme un levier structurant de résilience climatique, d’aménagement urbain et d’amélioration du cadre de vie.", "en": "The Tangier 2050 Vision, “Circular water, resilient metropolis”, proposes a new way of thinking about the metropolis's urban development. It places water at the heart of the territory's transformation, no longer merely as a resource to be mobilised or a constraint to be managed, but as a structuring lever for climate resilience, urban development and an improved living environment.", "ar": "تقترح رؤية طنجة 2050، « ماء دائري، حاضرة صامدة »، طريقة جديدة للتفكير في التنمية الحضرية للحاضرة. وتضع الماء في صلب تحول المجال، ليس فقط كمورد يجب تعبئته أو إكراه يجب تدبيره، بل كرافعة منظِّمة للصمود المناخي وإعداد المجال وتحسين إطار العيش."}, "declicType": "number", "chiffre": "6", "legchiffre": {"fr": "fiches d'actions prioritaires élaborées dans le Plan d'Action qui doivent assurer l'opérationnalisation de la Vision de Tanger.", "en": "priority action sheets developed in the Action Plan to ensure the operationalisation of the Tangier Vision.", "ar": "بطاقات عمل ذات أولوية أُعدّت ضمن مخطط العمل لضمان تفعيل رؤية طنجة."}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "", "en": "", "ar": ""}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "", "en": "", "ar": ""}, "contactNom": "", "contactRole": {"fr": "", "en": "", "ar": ""}, "contactMail": "mailto:carole.fappani@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/eau-circulaire-03-vision-tanger-2050.jpg"}]}, {"id": "PEEM", "axe": "2", "titre": {"fr": "Réduire la facture énergétique du pays", "en": "Reducing the country's energy bill", "ar": "خفض الفاتورة الطاقية للبلاد"}, "acronyme": "PEEM", "titreLong": {"fr": "Appui à l’efficacité énergétique au Maroc (PEEM)", "en": "Support for Energy Efficiency in Morocco (PEEM)", "ar": "دعم النجاعة الطاقية بالمغرب (PEEM)"}, "mission": {"fr": "PEEM appuie le Maroc à réduire sa consommation d'énergies fossiles dans les bâtiments, l'industrie et l'éclairage public, secteurs parmi les plus énergivores du pays. Pour y parvenir, il développe un marché viable de l'efficacité énergétique en agissant sur trois leviers : l'amélioration du cadre politique et réglementaire, la mise en place de mécanismes de financement, et la stimulation de l'offre et de la demande de produits et services en efficacité énergétique.", "en": "PEEM supports Morocco in reducing its fossil fuel consumption in buildings, industry and public lighting, among the country's most energy intensive sectors. To this end, it develops a viable energy efficiency market by acting on three levers: improving the policy and regulatory framework, setting up financing mechanisms, and stimulating the supply of and demand for energy efficiency products and services.", "ar": "يدعم برنامج PEEM المغرب في خفض استهلاكه من الطاقات الأحفورية في المباني والصناعة والإنارة العمومية، وهي من أكثر القطاعات استهلاكاً للطاقة في البلاد. ولتحقيق ذلك، يطور سوقاً قابلة للاستمرار في مجال النجاعة الطاقية عبر العمل على ثلاث روافع: تحسين الإطار السياسي والتنظيمي، وإرساء آليات للتمويل، وتحفيز العرض والطلب على منتجات وخدمات النجاعة الطاقية."}, "partenaire": "Ministère de la Transition Energétique et du Développement durable (MTEDD)", "periode": "2021-2026", "img": "images/projets/peem.jpg", "drive": "", "initiatives": [{"levier": {"fr": "Renforcement de capacités"}, "icon": "💡", "titre": {"fr": "Éclairage public communal", "en": "Municipal public lighting", "ar": "الإنارة العمومية الجماعية"}, "accroche": {"fr": "Aider les communes à reprendre la main sur leur éclairage public, premier poste de leur facture d'électricité.", "en": "Helping municipalities take back control of their public lighting, the leading item on their electricity bill.", "ar": "مساعدة الجماعات على استعادة التحكم في إنارتها العمومية، أول بند في فاتورتها الكهربائية."}, "defi": {"fr": "Pour beaucoup de communes, l'éclairage public peut représenter jusqu'à 50 % de la facture d'électricité, tout en étant géré de façon curative et fragmentée, au coup par coup, sans données fiables ni pilotage.", "en": "For many municipalities, public lighting can represent up to 50% of the electricity bill, while being managed in a curative, fragmented and piecemeal way, without reliable data or steering.", "ar": "بالنسبة للعديد من الجماعات، قد تمثل الإنارة العمومية ما يصل إلى 50% من فاتورة الكهرباء، مع كونها مُدبَّرة بشكل علاجي ومجزأ وظرفي، دون معطيات موثوقة أو قيادة."}, "reponse": {"fr": "PEEM a accompagné les communes selon un cycle complet : inventaire du parc lumineux, audit énergétique, rénovation LED ciblée, télégestion, et surtout mise en place d'un modèle de gestion durable et d'un montage financier « bancable ». L'appui couvre le technique, l'organisationnel et le financier, adapté aux contraintes propres aux collectivités.", "en": "PEEM supported municipalities through a complete cycle: lighting inventory, energy audit, targeted LED renovation, remote management, and above all the setting up of a sustainable management model and a “bankable” financial arrangement. The support covers the technical, organisational and financial aspects, tailored to the constraints specific to local authorities.", "ar": "واكب برنامج PEEM الجماعات عبر دورة كاملة: جرد منظومة الإنارة، وتدقيق طاقي، وتجديد مستهدَف بمصابيح LED، والتدبير عن بُعد، وخصوصاً إرساء نموذج تدبير مستدام وتركيب مالي قابل للتمويل. وتشمل المواكبة الجوانب التقنية والتنظيمية والمالية، مكيَّفة مع الإكراهات الخاصة بالجماعات."}, "declicType": "number", "chiffre": "17", "legchiffre": {"fr": "communes accompagnées, au-delà des 10 initialement visées", "en": "municipalities supported, beyond the 10 initially targeted", "ar": "جماعة تمت مواكبتها، أي ما يفوق العدد المستهدف أصلاً وهو 10"}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "National", "en": "Nationwide", "ar": "وطني"}, "statut": {"fr": "Achevé", "en": "Completed", "ar": "منجز"}, "transposable": {"fr": "Le cycle d'accompagnement, du diagnostic du parc jusqu'au modèle de gestion durable, est conçu pour être répliqué dans toute commune souhaitant moderniser son éclairage et alléger sa facture.", "en": "The support cycle, from inventory of the lighting stock to the sustainable management model, is designed to be replicated in any municipality wishing to modernise its lighting and lower its bill.", "ar": "دورة المواكبة، من جرد منظومة الإنارة إلى نموذج التدبير المستدام، مصممة لتُكرَّر في أي جماعة ترغب في تحديث إنارتها وتخفيف فاتورتها."}, "contactNom": "Kaoutar El Rhaffouli", "contactRole": {"fr": "Conseillère technique, PEEM", "en": "Technical Advisor, PEEM", "ar": "مستشارة تقنية، PEEM"}, "contactMail": "kaoutar.el@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/peem-01-eclairage-public-communa.jpg"}, {"levier": {"fr": "Assistance technique"}, "icon": "🏢", "titre": {"fr": "Efficacité énergétique des bâtiments publics", "en": "Energy efficiency of public buildings", "ar": "النجاعة الطاقية للمباني العمومية"}, "accroche": {"fr": "Faire des bâtiments publics des vitrines d'exemplarité énergétique pour les territoires.", "en": "Turning public buildings into showcases of energy exemplarity for the territories.", "ar": "جعل المباني العمومية واجهات للقدوة الطاقية في المجالات الترابية."}, "defi": {"fr": "Les bâtiments publics (administrations, tribunaux, logements sociaux, gares) consomment beaucoup d'énergie, sans démarche structurée de performance ni références concrètes pour agir.", "en": "Public buildings (administrations, courts, social housing, stations) consume a great deal of energy, without a structured performance approach or concrete benchmarks for action.", "ar": "تستهلك المباني العمومية (الإدارات، المحاكم، السكن الاجتماعي، المحطات) قدراً كبيراً من الطاقة، دون مقاربة منظَّمة للأداء ولا مراجع ملموسة للعمل."}, "reponse": {"fr": "PEEM a accompagné plus des bâtiments publics, en combinant « quick wins » (relamping, réglages, maintenance) et investissements structurants (CVC, solaire photovoltaïque), de la conception des bâtiments neufs à la rénovation de l'existant, avec un temps de retour de 3 à 5 ans.", "en": "PEEM supported numerous public buildings, combining “quick wins” (relamping, settings, maintenance) and structuring investments (HVAC, photovoltaic solar), from the design of new buildings to the renovation of existing ones, with a payback time of 3 to 5 years.", "ar": "واكب برنامج PEEM عدداً من المباني العمومية، عبر الجمع بين « المكاسب السريعة » (تغيير المصابيح، الضبط، الصيانة) والاستثمارات المهيكِلة (التدفئة والتهوية والتكييف، الطاقة الشمسية الكهروضوئية)، من تصميم المباني الجديدة إلى تجديد القائمة، بمدة استرجاع تتراوح بين 3 و5 سنوات."}, "declicType": "number", "chiffre": "40", "legchiffre": {"fr": "bâtiments publics accompagnés", "en": "public buildings supported", "ar": "مبنى عمومي تمت مواكبته"}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "National", "en": "Nationwide", "ar": "وطني"}, "statut": {"fr": "Achevé", "en": "Completed", "ar": "منجز"}, "transposable": {"fr": "La démarche « quick wins + investissements structurants », applicable à tout parc de bâtiments publics, est documentée en guides méthodologiques pour réplication.", "en": "The “quick wins plus structuring investments” approach, applicable to any stock of public buildings, is documented in methodological guides for replication.", "ar": "مقاربة « المكاسب السريعة مع الاستثمارات المهيكِلة »، القابلة للتطبيق على أي رصيد من المباني العمومية، موثَّقة في أدلة منهجية قصد التكرار."}, "contactNom": "Kaoutar El Rhaffouli", "contactRole": {"fr": "Conseillère technique, PEEM", "en": "Technical Advisor, PEEM", "ar": "مستشارة تقنية، PEEM"}, "contactMail": "kaoutar.el@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/peem-02-efficacite-energetique-d.jpg"}]}, {"id": "Green Jobs", "axe": "2", "titre": {"fr": "Créer des emplois verts grâce à la forêt", "en": "Creating green jobs through the forest", "ar": "إحداث وظائف خضراء بفضل الغابة"}, "acronyme": "Green Jobs", "titreLong": {"fr": "Promotion des emplois verts à travers les chaines de valeurs durables", "en": "Promoting green jobs through sustainable value chains", "ar": "إنعاش الوظائف الخضراء عبر سلاسل القيمة المستدامة"}, "mission": {"fr": "Améliorer la situation de l’emploi des jeunes dans les zones rurales à travers la promotion des chaines de valeurs durables \net les métiers verts.", "en": "To improve the employment situation of young people in rural areas through the promotion of sustainable value chains and green jobs.", "ar": "تحسين وضعية تشغيل الشباب في المناطق القروية عبر إنعاش سلاسل القيمة المستدامة والمهن الخضراء."}, "partenaire": "ANEF", "periode": "2023-2025", "img": "images/projets/green-jobs.jpg", "drive": "", "initiatives": [{"levier": {"fr": "Renforcement de capacités"}, "icon": "🌲", "titre": {"fr": "Les Agents de Développement et de Partenariat (ADP)", "en": "The Development and Partnership Agents (ADP)", "ar": "وكلاء التنمية والشراكة (ADP)"}, "accroche": {"fr": "Former les agents forestiers de terrain à devenir des accompagnateurs du développement économique local.", "en": "Training field forestry agents to become facilitators of local economic development.", "ar": "تكوين أعوان الغابات الميدانيين ليصبحوا مواكِبين للتنمية الاقتصادية المحلية."}, "defi": {"fr": "Les forêts marocaines perdent environ 17 000 ha/an, et leur potentiel économique durable n'est exploité qu'à 20-30 % de ce que produisent des forêts comparables un manque à gagner direct pour l'emploi rural.", "en": "Morocco's forests lose around 17,000 ha a year, and their sustainable economic potential is only tapped to 20 to 30% of what comparable forests produce, a direct shortfall for rural employment.", "ar": "تفقد غابات المغرب نحو 17.000 هكتار سنوياً، ولا تُستغل إمكاناتها الاقتصادية المستدامة إلا بنسبة 20 إلى 30% مما تنتجه غابات مماثلة، وهو ما يمثل خسارة مباشرة للتشغيل القروي."}, "reponse": {"fr": "Green Jobs II forme et coache sur le terrain les Agents de Développement et de Partenariat (ADP) acteurs clés de la stratégie nationale « Forêts du Maroc 2020-2030 » pour qu'ils accompagnent les populations locales dans la création d'activités économiques durables.", "en": "Green Jobs II trains and coaches in the field the Development and Partnership Agents (ADP), key actors of the national “Forests of Morocco 2020 to 2030” strategy, so that they can support local populations in creating sustainable economic activities.", "ar": "يكوّن مشروع Green Jobs II ويؤطر ميدانياً وكلاء التنمية والشراكة (ADP)، وهم فاعلون أساسيون في الاستراتيجية الوطنية « غابات المغرب 2020 إلى 2030 »، لتمكينهم من مواكبة الساكنة المحلية في إحداث أنشطة اقتصادية مستدامة."}, "declicType": "number", "chiffre": "2000", "legchiffre": {"fr": "emplois créés visés à l'horizon 2025", "en": "jobs targeted for creation by 2025", "ar": "منصب شغل مستهدَف إحداثه في أفق 2025"}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Tanger-Tétouan-Al Hoceïma, Béni Mellal-Khénifra, Fès-Meknès, Rabat-Salé-Kénitra", "en": "Tangier Tetouan Al Hoceima, Beni Mellal Khenifra, Fes Meknes, Rabat Sale Kenitra", "ar": "طنجة تطوان الحسيمة، بني ملال خنيفرة، فاس مكناس، الرباط سلا القنيطرة"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "Le modèle est réplicable dans toute administration cherchant à ancrer le développement dans ses territoires ruraux.", "en": "The model is replicable in any administration seeking to anchor development in its rural territories.", "ar": "النموذج قابل للتكرار في أي إدارة تسعى إلى ترسيخ التنمية في مجالاتها القروية."}, "contactNom": "Lamia Boufaticha", "contactRole": {"fr": "Conseillère technique senior, Green Jobs II", "en": "Senior Technical Advisor, Green Jobs II", "ar": "مستشارة تقنية أقدم، Green Jobs II"}, "contactMail": "Lamiae.boufaticha@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/green-jobs-01-les-agents-de-developpem.jpg"}, {"levier": {"fr": "Renforcement de capacités"}, "icon": "🌿", "titre": {"fr": "La professionnalisation des usagers de la forêt", "en": "Professionalising forest users", "ar": "تمهين مستعملي الغابة"}, "accroche": {"fr": "Organiser et former les usagers de la forêt pour qu'ils vivent durablement de ses ressources.", "en": "Organising and training forest users so they can sustainably make a living from its resources.", "ar": "تنظيم وتكوين مستعملي الغابة ليعيشوا بشكل مستدام من مواردها."}, "defi": {"fr": "Les populations qui dépendent de la forêt exploitaient ses ressources sans structuration économique ni accès aux marchés, captant une faible part de la valeur au détriment de leurs revenus et de la ressource elle-même.", "en": "The populations that depend on the forest exploited its resources without economic structuring or market access, capturing a small share of the value, to the detriment of their incomes and of the resource itself.", "ar": "كانت الساكنة المعتمِدة على الغابة تستغل مواردها دون هيكلة اقتصادية أو ولوج إلى الأسواق، فلا تحصل إلا على جزء ضئيل من القيمة، على حساب مداخيلها والمورد نفسه."}, "reponse": {"fr": "Le projet aide les usagers à se structurer en coopératives, renforce leurs capacités à exploiter durablement les ressources (plantes aromatiques et médicinales, écotourisme…) et élargit leurs débouchés commerciaux vers des marchés à fort volume.", "en": "The project helps users organise into cooperatives, strengthens their capacities to sustainably exploit resources (aromatic and medicinal plants, ecotourism, etc.) and broadens their commercial outlets toward high volume markets.", "ar": "يساعد المشروع المستعملين على التنظيم في تعاونيات، ويعزز قدراتهم على الاستغلال المستدام للموارد (النباتات العطرية والطبية، السياحة البيئية...)، ويوسّع منافذهم التجارية نحو أسواق كبيرة الحجم."}, "declicType": "number", "chiffre": "2500", "legchiffre": {"fr": "usagers de la forêts ont augmenté leurs revenus en 2025", "en": "forest users increased their incomes in 2025", "ar": "من مستعملي الغابة رفعوا مداخيلهم سنة 2025"}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Tanger-Tétouan-Al Hoceïma, Béni Mellal-Khénifra, Fès-Meknès, Rabat-Salé-Kénitra", "en": "Tangier Tetouan Al Hoceima, Beni Mellal Khenifra, Fes Meknes, Rabat Sale Kenitra", "ar": "طنجة تطوان الحسيمة، بني ملال خنيفرة، فاس مكناس، الرباط سلا القنيطرة"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "L'approche structuration en coopératives et accès aux marchés est transposable à toute filière rurale fondée sur des ressources naturelles.", "en": "The cooperative structuring plus market access approach is transferable to any rural sector based on natural resources.", "ar": "مقاربة الهيكلة في تعاونيات والولوج إلى الأسواق قابلة للنقل إلى أي قطاع قروي يعتمد على الموارد الطبيعية."}, "contactNom": "Lamia Boufaticha", "contactRole": {"fr": "Conseillère technique senior, Green Jobs II", "en": "Senior Technical Advisor, Green Jobs II", "ar": "مستشارة تقنية أقدم، Green Jobs II"}, "contactMail": "Lamiae.boufaticha@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/green-jobs-02-la-professionnalisation.jpg"}]}, {"id": "CESAR II", "axe": "2", "titre": {"fr": "Favoriser l'emploi et l'innovation dans l'eau", "en": "Fostering jobs and innovation in water", "ar": "تشجيع التشغيل والابتكار في قطاع الماء"}, "acronyme": "CESAR II", "titreLong": {"fr": "Favoriser la création de nouveaux emplois et le développement technologique dans le secteur de l’eau au Maroc", "en": "Fostering the creation of new jobs and technological development in Morocco's water sector", "ar": "تشجيع إحداث مناصب شغل جديدة والتطوير التكنولوجي في قطاع الماء بالمغرب"}, "mission": {"fr": "Créer des emplois durables dans les secteurs de l'eau et de l'assainissement au Maroc, particulièrement en milieu rural et périurbain. Le projet déploie également  des technologies innovantes et des qualifications professionnelles spécifiques.", "en": "To create sustainable jobs in the water and sanitation sectors in Morocco, particularly in rural and peri urban areas. The project also deploys innovative technologies and specific professional qualifications.", "ar": "إحداث مناصب شغل مستدامة في قطاعي الماء والتطهير السائل بالمغرب، خاصة في الوسطين القروي وشبه الحضري. كما ينشر المشروع تقنيات مبتكرة ومؤهلات مهنية متخصصة."}, "partenaire": "Ministère de l'Intérieur; DGCT; DRPL", "periode": "2022-2026", "img": "images/projets/cesar2.jpg", "drive": "", "initiatives": [{"levier": {"fr": "Renforcement de capacités"}, "icon": "🚰", "titre": {"fr": "Professionalisation des Sociétés régionales multiservices (SRM)", "en": "Professionalising the Regional Multiservice Companies (SRM)", "ar": "تمهين الشركات الجهوية متعددة الخدمات (SRM)"}, "accroche": {"fr": "Outiller les nouvelles sociétés régionales de l'eau pour des services publics plus proches et plus performants.", "en": "Equipping the new regional water companies for public services that are closer and more efficient.", "ar": "تجهيز الشركات الجهوية الجديدة للماء من أجل خدمات عمومية أقرب وأكثر نجاعة."}, "defi": {"fr": "Le Maroc confie ses services d'eau et d'assainissement à de nouvelles Sociétés Régionales Multiservices (SRM), pilier de la régionalisation avancée, mais ces jeunes entités doivent monter en compétence rapidement pour assurer un service de qualité à l'échelle de tout un territoire.", "en": "Morocco is entrusting its water and sanitation services to new Regional Multiservice Companies (SRM), a pillar of advanced regionalisation, but these young entities must rapidly build their skills to deliver quality service across an entire territory.", "ar": "يُسند المغرب خدمات الماء والتطهير السائل إلى شركات جهوية جديدة متعددة الخدمات (SRM)، وهي ركيزة من ركائز الجهوية المتقدمة، لكن على هذه الكيانات الفتية أن ترفع كفاءتها بسرعة لضمان خدمة جيدة على صعيد مجال بأكمله."}, "reponse": {"fr": "Le projet accompagne les SRM par des formations, de l'échange institutionnel et l'appui à un système de formation interne, en professionnalisant aussi bien les agents que les sous-traitants (qualité, sécurité, chantiers).", "en": "The project supports the SRM through training, institutional exchange and support for an internal training system, professionalising both staff and subcontractors (quality, safety, worksites).", "ar": "يواكب المشروع الشركات الجهوية متعددة الخدمات عبر التكوينات والتبادل المؤسساتي ودعم منظومة تكوين داخلية، مع تمهين الأعوان والمقاولين من الباطن على حد سواء (الجودة، السلامة، الأوراش)."}, "declicType": "quote", "chiffre": "", "legchiffre": {"fr": "", "en": "", "ar": ""}, "citation": {"fr": "La SRM Marrakech-Safi a participé au World Water Skills dans le cadre de l'IFAT à Munich 2026.", "en": "The SRM Marrakech Safi took part in the World Water Skills competition at IFAT in Munich, 2026.", "ar": "شاركت الشركة الجهوية متعددة الخدمات بمراكش آسفي في مسابقة World Water Skills ضمن معرض IFAT بميونيخ 2026."}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Marrakech-Safi", "en": "Marrakech Safi", "ar": "مراكش آسفي"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "L'accompagnement à la montée en compétence d'un opérateur régional de service est transposable à tout territoire qui réorganise ses services essentiels.", "en": "Supporting the capacity building of a regional service operator is transferable to any territory reorganising its essential services.", "ar": "مواكبة الرفع من كفاءة مُشغّل جهوي للخدمات قابلة للنقل إلى أي مجال يعيد تنظيم خدماته الأساسية."}, "contactNom": "Michael Kirchesch", "contactRole": {"fr": "Conseiller technique principal, CESAR II", "en": "Principal Technical Advisor, CESAR II", "ar": "المستشار التقني الرئيسي، CESAR II"}, "contactMail": "michael.kirchesch@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/cesar2-01-professionalisation-des.jpg"}, {"levier": {"fr": "Renforcement de capacités"}, "icon": "🌱", "titre": {"fr": "L'emploi vert local dans les territoires du séisme", "en": "Local green jobs in the earthquake stricken territories", "ar": "الوظائف الخضراء المحلية في المناطق المتضررة من الزلزال"}, "accroche": {"fr": "Former et installer de jeunes techniciens — femmes et hommes — sur leurs propres territoires, après le séisme.", "en": "Training and establishing young technicians, women and men, in their own territories after the earthquake.", "ar": "تكوين شباب تقنيين، نساءً ورجالاً، وتمكينهم من الاستقرار في مجالاتهم بعد الزلزال."}, "defi": {"fr": "Dans les zones rurales de Marrakech-Safi touchées par le séisme, les jeunes diplômés techniques peinaient à s'insérer faute d'accompagnement vers l'emploi ou l'entrepreneuriat, un frein à la reconstruction économique locale.", "en": "In the rural areas of Marrakech Safi affected by the earthquake, young technical graduates struggled to find their place for lack of support toward employment or entrepreneurship, a brake on local economic reconstruction.", "ar": "في المناطق القروية بمراكش آسفي المتضررة من الزلزال، كان الخريجون التقنيون الشباب يجدون صعوبة في الاندماج لغياب المواكبة نحو التشغيل أو المقاولة، وهو ما يكبح إعادة البناء الاقتصادي المحلي."}, "reponse": {"fr": "CESAR II forme aux métiers de l'eau, de l'assainissement et des énergies renouvelables, puis accompagne l'installation : auto-entrepreneuriat, création de coopératives, soft skills et employabilité, avec une attention forte à l'inclusion des femmes et des populations rurales.", "en": "CESAR II trains in water, sanitation and renewable energy trades, then supports establishment: self employment, cooperative creation, soft skills and employability, with strong attention to the inclusion of women and rural populations.", "ar": "يكوّن مشروع CESAR II في مهن الماء والتطهير السائل والطاقات المتجددة، ثم يواكب الاستقرار المهني: المقاولة الذاتية، وإحداث التعاونيات، والمهارات الناعمة والقابلية للتشغيل، مع اهتمام قوي بإدماج النساء والساكنة القروية."}, "declicType": "quote", "chiffre": "", "legchiffre": {"fr": "", "en": "", "ar": ""}, "citation": {"fr": "Après une formation aux métiers de l'assainissement, j'ai cofondé avec mes voisins une coopérative de toilettes mobiles. Aujourd'hui, je suis prêt à affronter mon avenir professionnel sereinement.", "en": "After training in sanitation trades, I co founded a mobile toilets cooperative with my neighbours. Today, I feel ready to face my professional future with confidence.", "ar": "بعد تكوين في مهن التطهير السائل، أسستُ مع جيراني تعاونية لإنتاج المراحيض المتنقلة. اليوم، أشعر أنني مستعد لمواجهة مستقبلي المهني بكل اطمئنان."}, "auteur": "Abdelwahed", "roleauteur": {"fr": "Chef technique de la coopérative CESAR-Al Haouz", "en": "Technical lead of the CESAR Al Haouz cooperative", "ar": "المسؤول التقني لتعاونية CESAR الحوز"}, "region": {"fr": "Marrakech-Safi", "en": "Marrakech Safi", "ar": "مراكش آسفي"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "Le modèle formation et installation locale est réplicable dans tout territoire rural cherchant à retenir et employer ses jeunes, en particulier en contexte de reconstruction.", "en": "The training plus local establishment model is replicable in any rural territory seeking to retain and employ its young people, particularly in a reconstruction context.", "ar": "نموذج التكوين والاستقرار المحلي قابل للتكرار في أي مجال قروي يسعى إلى استبقاء شبابه وتشغيلهم، خاصة في سياق إعادة البناء."}, "contactNom": "Michael Kirchesch", "contactRole": {"fr": "Conseiller technique principal, CESAR II", "en": "Principal Technical Advisor, CESAR II", "ar": "المستشار التقني الرئيسي، CESAR II"}, "contactMail": "michael.kirchesch@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/cesar2-02-l-emploi-vert-local-dans.jpg"}]}, {"id": "Territoires durables", "axe": "2", "titre": {"fr": "Des territoires résilients face au climat", "en": "Territories resilient to climate change", "ar": "مجالات صامدة في وجه المناخ"}, "acronyme": "Territoires durables", "titreLong": {"fr": "Des moyens de subsistance plus résilients au Maroc", "en": "Making livelihoods in Morocco more resilient", "ar": "سبل عيش أكثر صموداً بالمغرب"}, "mission": {"fr": "Le projet vise à renforcer la résilience des populations du Haut Atlas, durement touchées par le séisme de 2023, en favorisant une utilisation plus durable des ressources naturelles, en particulier l'eau, et en réduisant leur exposition aux risques naturels.", "en": "The project aims to strengthen the resilience of the populations of the High Atlas, hard hit by the 2023 earthquake, by promoting a more sustainable use of natural resources, particularly water, and by reducing their exposure to natural risks.", "ar": "يهدف المشروع إلى تعزيز قدرة ساكنة الأطلس الكبير، التي تضررت بشدة من زلزال 2023، على الصمود، عبر تشجيع استعمال أكثر استدامة للموارد الطبيعية، ولا سيما الماء، والحد من تعرضها للمخاطر الطبيعية."}, "partenaire": "Ministère de l'équipe et de l'eau", "periode": "2024-2029", "img": "images/projets/territoires-durables.jpg", "drive": "", "initiatives": [{"levier": {"fr": ""}, "icon": "•", "titre": {"fr": "Modes de vie durables\net résilients au Maroc", "en": "Sustainable and resilient livelihoods in Morocco", "ar": "سبل عيش مستدامة وصامدة بالمغرب"}, "accroche": {"fr": "Renforcer la résilience des populations du Haut Atlas frappées par le séisme, par une gestion durable de l'eau.", "en": "Strengthening the resilience of the earthquake stricken High Atlas populations through sustainable water management.", "ar": "تعزيز صمود ساكنة الأطلس الكبير المتضررة من الزلزال عبر تدبير مستدام للماء."}, "defi": {"fr": "Déjà sous forte pression avant le séisme du 8 septembre 2023, les ressources en eau du Haut Atlas vitales pour les communautés rurales ont été encore fragilisées par la catastrophe, perturbant l'accès à l'eau et les moyens de subsistance.", "en": "Already under heavy pressure before the earthquake of 8 September 2023, the High Atlas water resources, vital for rural communities, were further weakened by the disaster, disrupting access to water and means of subsistence.", "ar": "كانت الموارد المائية بالأطلس الكبير، الحيوية للمجتمعات القروية، تحت ضغط شديد قبل زلزال 8 شتنبر 2023، فزادتها الكارثة هشاشةً، مُخلّةً بالولوج إلى الماء وبسبل العيش."}, "reponse": {"fr": "Le projet agit sur trois fronts : instaurer une gouvernance concertée de l'eau (contrat de rivière de l'Ourika réunissant communes, usagers et institutions), déployer des pilotes d'hydraulique villageoise et des solutions fondées sur la nature, et développer des chaînes de valeur vertes au bénéfice des communautés.", "en": "The project acts on three fronts: establishing concerted water governance (the Ourika river contract bringing together municipalities, users and institutions), deploying village hydraulics pilots and nature based solutions, and developing green value chains for the benefit of communities.", "ar": "يعمل المشروع على ثلاث جبهات: إرساء حكامة تشاركية للماء (عقد نهر أوريكا الذي يجمع الجماعات والمستعملين والمؤسسات)، وإطلاق مشاريع نموذجية للهيدروليك القروي وحلول قائمة على الطبيعة، وتطوير سلاسل قيمة خضراء لفائدة المجتمعات."}, "declicType": "number", "chiffre": "8", "legchiffre": {"fr": "le nombre de sources d'eau dont le projet vise l'aménagement.", "en": "the number of water sources the project aims to develop.", "ar": "عدد منابع الماء التي يستهدف المشروع تهيئتها."}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "Haut Atlas", "en": "High Atlas", "ar": "الأطلس الكبير"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "L'approche territoriale intégrée axée autour d'une gouvernance de bassin, solutions fondées sur la nature, chaînes de valeur vertes est conçue dès l'origine pour être répliquée dans d'autres régions du Maroc.", "en": "The integrated territorial approach, built around basin governance, nature based solutions and green value chains, is designed from the outset to be replicated in other regions of Morocco.", "ar": "المقاربة المجالية المندمجة، القائمة على حكامة الحوض والحلول المستندة إلى الطبيعة وسلاسل القيمة الخضراء، مصممة منذ البداية لتُكرَّر في جهات أخرى بالمغرب."}, "contactNom": "Anne Chaponnière", "contactRole": {"fr": "Conseillère technique principale, Territoires durables", "en": "Principal Technical Advisor, Sustainable Territories", "ar": "المستشارة التقنية الرئيسية، الأقاليم المستدامة"}, "contactMail": "anne.chaponniere@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/territoires-durables-01-modes-de-vie-durables-et.jpg"}]}]}, {"id": "serv", "theme": "serv", "num": "03", "title": {"fr": "Des services publics proches", "en": "Public services close to people", "ar": "تقريب الخدمات العمومية"}, "projects": [{"id": "BGF", "axe": "3", "titre": {"fr": "Renforcer les finances des collectivités", "en": "Strengthening local authority finances", "ar": "تعزيز مالية الجماعات الترابية"}, "acronyme": "BGF", "titreLong": {"fr": "Soutenir la bonne gouvernance financière", "en": "Supporting good financial governance", "ar": "دعم الحكامة المالية الجيدة"}, "mission": {"fr": "Les conditions et instruments visant à générer davantage des recettes propres tout en gérant les budgets de manière efficace et transparente dans les régions et les communes sont développés.", "en": "The conditions and instruments to generate more own revenues while managing budgets efficiently and transparently in regions and municipalities are developed.", "ar": "تطوير الشروط والأدوات الكفيلة بتوليد مزيد من الموارد الذاتية مع تدبير الميزانيات بفعالية وشفافية على مستوى الجهات والجماعات."}, "partenaire": "Ministère de l'intérieur / DGCT", "periode": "2021-2026", "img": "images/projets/bgf.jpg", "drive": "", "initiatives": [{"levier": {"fr": "Assistance technique"}, "icon": "•", "titre": {"fr": "Les Plans de Mobilisation des Recettes au sein des collectivités", "en": "Revenue Mobilisation Plans within local authorities", "ar": "مخططات تعبئة المداخيل داخل الجماعات الترابية"}, "accroche": {"fr": "Un outil de gouvernance interne, porté politiquement par les élus locaux et opérationnellement par les services communaux.", "en": "An internal governance tool, championed politically by elected officials and operationally by municipal services.", "ar": "أداة للحكامة الداخلية، يحملها سياسياً المنتخبون وعملياً المصالح الجماعية."}, "defi": {"fr": "Dans de nombreuses collectivités, la mobilisation des recettes repose encore largement sur des pratiques fragmentées, peu formalisées et fortement dépendantes des personnes plutôt que des systèmes. Les recettes sont mobilisées, mais rarement à partir d'une stratégie claire, partagée et suivie dans le temps.", "en": "In many local authorities, revenue mobilisation still relies largely on fragmented, poorly formalised practices that depend heavily on individuals rather than systems. Revenues are mobilised, but rarely from a clear strategy that is shared and monitored over time.", "ar": "في العديد من الجماعات، لا تزال تعبئة المداخيل تعتمد إلى حد كبير على ممارسات مجزأة وغير ممأسسة، وترتبط بالأشخاص أكثر من ارتباطها بالأنظمة. فالمداخيل تُعبأ، لكن نادراً ما يتم ذلك انطلاقاً من استراتيجية واضحة ومشتركة ومتابَعة عبر الزمن."}, "reponse": {"fr": "Les PMR apportent aux communes un cadre structurant leur permettant de passer d'une logique réactive à une démarche stratégique et pilotée. 8 communes pilotes ont été accompagnées dans la mise en œuvre de la Plan de mobilisation des recettes. Chaque PMR a débouché sur une stratégie d'actions structurée, visant à améliorer la mobilisation des recettes sans alourdir la pression fiscale. L'accent a été mis sur l'élargissement de l'assiette, l'amélioration des pratiques de déclaration et de paiement, le renforcement du contrôle et l'optimisation du recouvrement.", "en": "The Revenue Mobilisation Plans give municipalities a structuring framework that allows them to move from a reactive logic to a strategic, steered approach. 8 pilot municipalities were supported in rolling out their Revenue Mobilisation Plan. Each plan resulted in a structured action strategy aimed at improving revenue mobilisation without increasing the tax burden. The focus was on broadening the tax base, improving declaration and payment practices, strengthening control and optimising collection.", "ar": "تمنح مخططات تعبئة المداخيل الجماعات إطاراً منظِّماً يتيح لها الانتقال من منطق رد الفعل إلى مقاربة استراتيجية موجَّهة. وقد تمت مواكبة 8 جماعات نموذجية في تنزيل مخطط تعبئة المداخيل. وأفضى كل مخطط إلى استراتيجية عمل منظَّمة تهدف إلى تحسين تعبئة المداخيل دون رفع الضغط الجبائي، مع التركيز على توسيع الوعاء الضريبي وتحسين ممارسات التصريح والأداء وتعزيز المراقبة وتحسين التحصيل."}, "declicType": "number", "chiffre": "48", "legchiffre": {"fr": "Mesures réalisées dans le cadre des PMR dans 8 communes", "en": "measures carried out under the Revenue Mobilisation Plans in 8 municipalities", "ar": "إجراءً تم إنجازه في إطار مخططات تعبئة المداخيل في 8 جماعات"}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "3 régions : Marrakech- Safi ; Guelmim - Oued noun ; Souss-Massa", "en": "3 regions: Marrakech Safi; Guelmim Oued Noun; Souss Massa", "ar": "3 جهات: مراكش آسفي؛ كلميم وادي نون؛ سوس ماسة"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "Cette approche est transposable à d'autres collectivités locales.", "en": "This approach is transferable to other local authorities.", "ar": "هذه المقاربة قابلة للنقل إلى جماعات ترابية أخرى."}, "contactNom": "Othman Fahim", "contactRole": {"fr": "Conseiller technique, BGF", "en": "Technical Advisor, BGF", "ar": "مستشار تقني، BGF"}, "contactMail": "othmane.fahim@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/bgf-01-les-plans-de-mobilisatio.jpg"}, {"levier": {"fr": "Gouvernance"}, "icon": "•", "titre": {"fr": "Coûts induits/additionnels et Intégration du genre dans la planification", "en": "Induced/additional costs and gender mainstreaming in planning", "ar": "التكاليف المُحدَثة/الإضافية وإدماج النوع في التخطيط"}, "accroche": {"fr": "Concilier ambition d'investissement, réalisme budgétaire et prise en compte des impacts sociaux.", "en": "Reconciling investment ambition, budget realism and consideration of social impacts.", "ar": "التوفيق بين طموح الاستثمار والواقعية الميزانياتية ومراعاة الآثار الاجتماعية."}, "defi": {"fr": "Dans de nombreux contextes, les projets sont conçus et programmés principalement à partir de leur coût initial, sans toujours anticiper les charges futures qu'ils ne génèrent ni les effets différenciés qu'ils peuvent produire sur les populations.", "en": "In many contexts, projects are designed and programmed primarily on the basis of their initial cost, without always anticipating the future charges they generate or the differentiated effects they may have on populations.", "ar": "في سياقات عديدة، تُصمَّم المشاريع وتُبرمَج أساساً انطلاقاً من كلفتها الأولية، دون استباق دائم للأعباء المستقبلية التي تولّدها أو للآثار المتباينة التي قد تُحدثها على الساكنة."}, "reponse": {"fr": "Le projet est intervenu en amont de la décision, au niveau de la planification afin d'intégrer les coûts induits et additionnels des investissements et ainsi améliorer la soutenabilité financière des plans d'action communaux et régionaux. Le projet a également intégré la dimension genre afin de rendre la planification plus inclusive et plus attentive aux inégalités. Le tout sans complexifier, mais en faisant évoluer progressivement les outils existants.", "en": "The project intervened upstream of the decision, at the planning level, to factor in the induced and additional costs of investments and thereby improve the financial sustainability of municipal and regional action plans. The project also mainstreamed the gender dimension to make planning more inclusive and more attentive to inequalities, all without adding complexity but by gradually evolving the existing tools.", "ar": "تدخّل المشروع في مرحلة ما قبل القرار، على مستوى التخطيط، لإدماج التكاليف المُحدَثة والإضافية للاستثمارات وبالتالي تحسين الاستدامة المالية لمخططات العمل الجماعية والجهوية. كما أدمج المشروع بُعد النوع لجعل التخطيط أكثر شمولية وأكثر انتباهاً للتفاوتات، دون زيادة في التعقيد، بل عبر تطوير تدريجي للأدوات القائمة."}, "declicType": "quote", "chiffre": "", "legchiffre": {"fr": "", "en": "", "ar": ""}, "citation": {"fr": "En reliant la question du genre à des enjeux concrets, emploi, accès aux services,  sécurité, autonomie économique, le projet a contribué à dépasser  une vision perçue comme abstraite ou extérieure aux préoccupations locales.", "en": "By linking the gender question to concrete issues, employment, access to services, safety, economic autonomy, the project helped move beyond a vision perceived as abstract or external to local concerns.", "ar": "عبر ربط مسألة النوع بقضايا ملموسة، كالتشغيل والولوج إلى الخدمات والأمن والاستقلالية الاقتصادية، ساهم المشروع في تجاوز رؤية كانت تُعتبر مجردة أو خارجة عن الانشغالات المحلية."}, "auteur": "Othmane Fahim", "roleauteur": {"fr": "Conseiller technique, BGF", "en": "Technical Advisor, BGF", "ar": "مستشار تقني، BGF"}, "region": {"fr": "3 régions : Marrakech- Safi ; Guelmim - Oued noun ; Souss-Massa", "en": "3 regions: Marrakech Safi; Guelmim Oued Noun; Souss Massa", "ar": "3 جهات: مراكش آسفي؛ كلميم وادي نون؛ سوس ماسة"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "Cette approche est transposable à d'autres collectivités locales.", "en": "This approach is transferable to other local authorities.", "ar": "هذه المقاربة قابلة للنقل إلى جماعات ترابية أخرى."}, "contactNom": "Othman Fahim", "contactRole": {"fr": "Conseiller technique, BGF", "en": "Technical Advisor, BGF", "ar": "مستشار تقني، BGF"}, "contactMail": "mailto:omar.bennouna@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/bgf-02-couts-induits-additionne.jpg"}, {"levier": {"fr": "Gouvernance"}, "icon": "•", "titre": {"fr": "Référentiel KPI", "en": "KPI framework", "ar": "مرجعية مؤشرات الأداء"}, "accroche": {"fr": "Permettre aux collectivités de mesurer leur performance et à disposer d'une information financière fiable, complète et exploitable pour la décision.", "en": "Enabling local authorities to measure their performance and access reliable, complete and usable financial information for decision making.", "ar": "تمكين الجماعات من قياس أدائها والتوفر على معلومة مالية موثوقة وكاملة وقابلة للاستثمار في اتخاذ القرار."}, "defi": {"fr": "Sans outils de suivi adaptés et sans une comptabilité capable de refléter la réalité économique et patrimoniable, les efforts engagés sur la mobilisation des recettes et la planification risquent de rester partiels.", "en": "Without suitable monitoring tools and accounting capable of reflecting the economic and asset reality, the efforts made on revenue mobilisation and planning risk remaining partial.", "ar": "بدون أدوات تتبع ملائمة ومحاسبة قادرة على عكس الواقع الاقتصادي والممتلكاتي، تظل الجهود المبذولة في تعبئة المداخيل والتخطيط مهددة بأن تبقى ناقصة."}, "reponse": {"fr": "Le projet a mis en place, en co-construction avec les acteurs institutionnels un référentiel d'indicateurs de performance destiné à aider les collectivités et l'administration centrale à mieux apprécier les résultats de l'action publique locale. Un accompagnement vers une comptabilité d'exercice marque un changement profond dans la manière de concevoir et de piloter les finances locales.", "en": "In co construction with institutional stakeholders, the project set up a framework of performance indicators designed to help local authorities and the central administration better assess the results of local public action. Support toward accrual accounting marks a profound change in how local finances are conceived and steered.", "ar": "بالتشارك مع الفاعلين المؤسساتيين، أرسى المشروع مرجعية لمؤشرات الأداء تهدف إلى مساعدة الجماعات والإدارة المركزية على تقييم أفضل لنتائج العمل العمومي المحلي. وتشكّل المواكبة نحو محاسبة الاستحقاق تحولاً عميقاً في طريقة تصور وقيادة المالية المحلية."}, "declicType": "number", "chiffre": "67", "legchiffre": {"fr": "Le nombre d'indicateurs de performance listés dans le référentiel", "en": "the number of performance indicators listed in the framework", "ar": "عدد مؤشرات الأداء المدرَجة في المرجعية"}, "citation": {"fr": "", "en": "", "ar": ""}, "auteur": "", "roleauteur": {"fr": "", "en": "", "ar": ""}, "region": {"fr": "3 régions : Marrakech- Safi ; Guelmim - Oued noun ; Souss-Massa", "en": "3 regions: Marrakech Safi; Guelmim Oued Noun; Souss Massa", "ar": "3 جهات: مراكش آسفي؛ كلميم وادي نون؛ سوس ماسة"}, "statut": {"fr": "En cours", "en": "Ongoing", "ar": "جارٍ"}, "transposable": {"fr": "Cette approche est transposable à d'autres collectivités locales.", "en": "This approach is transferable to other local authorities.", "ar": "هذه المقاربة قابلة للنقل إلى جماعات ترابية أخرى."}, "contactNom": "Othman Fahim", "contactRole": {"fr": "Conseiller technique, BGF", "en": "Technical Advisor, BGF", "ar": "مستشار تقني، BGF"}, "contactMail": "othmane.fahim@giz.de", "video": "", "videoCap": {"fr": "", "en": "", "ar": ""}, "img": "images/initiatives/bgf-03-referentiel-kpi.jpg"}]}]}]};
+const I18N={
+  congress:{fr:"CGLU · Tanger 2026",en:"UCLG · Tangier 2026",ar:"CGLU · طنجة 2026"},
+  home:{fr:"Accueil",en:"Home",ar:"الرئيسية"},
+  kicker:{fr:"Coopération maroco-allemande",en:"Moroccan-German cooperation",ar:"التعاون المغربي الألماني"},
+  homeTitle:{fr:"La coopération allemande au Maroc, projet par projet",en:"German cooperation in Morocco, project by project",ar:"التعاون الألماني بالمغرب، مشروعاً تلو الآخر"},
+  homeSub:{fr:"Explorez nos axes d'action. Derrière chaque projet, des solutions concrètes et transposables. Une question vous interpelle ? Parlons-en sur le stand.",en:"Explore our areas of action. Behind each project, concrete and transferable solutions. A question sparks your interest? Let's talk at the stand.",ar:"استكشفوا محاور عملنا. خلف كل مشروع، حلول ملموسة وقابلة للنقل. أثار سؤال اهتمامكم؟ لنتحدث في الجناح."},
+  projectsIn:{fr:"Projets de cet axe",en:"Projects in this area",ar:"مشاريع هذا المحور"},
+  initiativesIn:{fr:"Initiatives du projet",en:"Project initiatives",ar:"مبادرات المشروع"},
+  challenge:{fr:"Le défi",en:"The challenge",ar:"التحدي"},
+  response:{fr:"La réponse",en:"The response",ar:"الاستجابة"},
+  keyFacts:{fr:"Repères",en:"Key facts",ar:"معطيات أساسية"},
+  lever:{fr:"Levier",en:"Lever",ar:"الرافعة"},
+  transpoLabel:{fr:"Transposable",en:"Transferable",ar:"قابل للنقل"},
+  contactCta:{fr:"Découvrez si c'est transposable chez vous",en:"Find out if it fits your territory",ar:"اكتشفوا ما إذا كان قابلاً للتطبيق لديكم"},
+  region:{fr:"Région",en:"Region",ar:"الجهة"},period:{fr:"Période",en:"Period",ar:"الفترة"},
+  partner:{fr:"Partenaire",en:"Partner",ar:"الشريك"},statusL:{fr:"Statut",en:"Status",ar:"الحالة"},
+  proj:{fr:"projets",en:"projects",ar:"مشاريع"},init:{fr:"initiatives",en:"initiatives",ar:"مبادرات"},
+  videoPlaceholder:{fr:"Emplacement vidéo, fichier .mp4 local, lecture hors-ligne.",en:"Video placeholder, local .mp4 file, offline playback.",ar:"موضع الفيديو، ملف .mp4 محلي، تشغيل دون اتصال."},
+  qrTitle:{fr:"Emportez toute la documentation du projet",en:"Take the full project documentation with you",ar:"احصلوا على كامل وثائق المشروع"},
+  qrHint:{fr:"Scannez le code",en:"Scan the code",ar:"امسحوا الرمز"},
+  back:{fr:"Précédent",en:"Back",ar:"رجوع"},
+  footer:{fr:"Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ) GmbH · Coopération maroco-allemande",en:"Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ) GmbH · Moroccan-German cooperation",ar:"الوكالة الألمانية للتعاون الدولي (GIZ) · التعاون المغربي الألماني"}
+};
+let lang="fr",nav={axis:null,project:null,init:null};
+const T=(o)=>o?(typeof o==='string'?o:(o[lang]||o.fr||"")):"";
+const main=document.getElementById('main'),crumbsEl=document.getElementById('crumbs');
+function setLang(l){lang=l;document.documentElement.lang=l;document.body.classList.toggle('rtl',l==='ar');
+  document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(I18N[k])el.textContent=T(I18N[k]);});
+  render();}
+function go(level,ids={}){
+  if(level==='home')nav={axis:null,project:null,init:null};
+  else if(level==='axis')nav={axis:ids.axis,project:null,init:null};
+  else if(level==='project')nav={axis:ids.axis,project:ids.project,init:null};
+  else if(level==='init')nav={axis:ids.axis,project:ids.project,init:ids.init};
+  render();resetIdle();}
+const getAxis=()=>DATA.axes.find(a=>a.id===nav.axis);
+const getProject=()=>{const a=getAxis();return a&&a.projects.find(p=>p.id===nav.project);};
+const getInit=()=>{const p=getProject();return p&&p.initiatives[nav.init];};
+const themeColor=(t)=>t==='econ'?'var(--econ)':t==='eco'?'var(--eco)':'var(--serv)';
+function renderCrumbs(){
+  let h=`<button onclick="go('home')"><span class="back-arrow">←</span> ${T(I18N.home)}</button>`;
+  if(nav.axis){const a=getAxis();h+=`<span class="sep">/</span><button onclick="go('axis',{axis:'${a.id}'})">${T(a.title)}</button>`;}
+  if(nav.project){const p=getProject();h+=`<span class="sep">/</span><button onclick="go('project',{axis:'${nav.axis}',project:'${p.id}'})">${T(p.titre)}</button>`;}
+  if(nav.init!==null&&nav.init!==undefined){const n=getInit();if(n)h+=`<span class="sep">/</span><span class="current">${T(n.titre)}</span>`;}
+  crumbsEl.innerHTML=nav.axis?h:'';}
+function render(){renderCrumbs();updateFab();
+  if(!nav.axis){startHomeBg();}else{stopHomeBg();}
+  let v;
+  if(nav.init!==null&&nav.init!==undefined)v=viewDetail();else if(nav.project)v=viewInits();
+  else if(nav.axis)v=viewProjects();else v=viewHome();
+  main.innerHTML=`<div class="screen active">${v}</div>`;main.scrollTop=0;}
+function startHomeBg(){
+  const imgs=['images/accueil/accueil-1.jpg','images/accueil/accueil-2.jpg','images/accueil/accueil-3.jpg'];
+  const bg=document.getElementById('homeBg');
+  bg.innerHTML=imgs.map((s,i)=>`<div class="slide${i===0?' active':''}" style="background-image:url('${s}')"></div>`).join('');
+  let idx=0;const slides=bg.querySelectorAll('.slide');
+  if(window._homeTimer)clearInterval(window._homeTimer);
+  window._homeTimer=setInterval(()=>{slides[idx].classList.remove('active');
+    idx=(idx+1)%slides.length;slides[idx].classList.add('active');},7000);
+}
+function stopHomeBg(){if(window._homeTimer)clearInterval(window._homeTimer);
+  const bg=document.getElementById('homeBg');if(bg)bg.innerHTML='';}
+function viewHome(){
+  const cards=DATA.axes.map(a=>`<div class="axis-card" data-theme="${a.theme}" onclick="go('axis',{axis:'${a.id}'})">
+    <div class="glow"></div><div><div class="axis-num">${a.num}</div><div class="axis-bar"></div>
+    <h3>${T(a.title)}</h3></div>
+    <div class="axis-foot"><span class="axis-count">${a.projects.length} ${T(I18N.proj)}</span>
+    <div class="axis-go">→</div></div></div>`).join('');
+  return `<div class="home-intro"><span class="kicker">${T(I18N.kicker)}</span>
+    <h2 class="display">${T(I18N.homeTitle)}</h2><p>${T(I18N.homeSub)}</p></div><div class="axes">${cards}</div>`;}
+function viewProjects(){
+  const a=getAxis(),color=themeColor(a.theme);
+  const cards=a.projects.map(p=>{
+    const bg=p.img?`style="background-image:url('${p.img}')"`:'';
+    const ph=p.img?'':`<span class="ph">${p.id}</span>`;
+    const acr=p.acronyme?`<span class="pacr">${p.acronyme}</span>`:'';
+    return `<div class="project-card" onclick="go('project',{axis:'${a.id}',project:'${p.id}'})">
+    <div class="pimg" ${bg}>${acr}${ph}</div>
+    <div class="pbody"><h3>${T(p.titre)}</h3><p class="pmission">${T(p.mission)}</p>
+    <div class="pfoot"><span class="pcount">${p.initiatives.length} ${T(I18N.init)}</span>
+    <span class="parrow">→</span></div></div></div>`;}).join('');
+  return `<div class="section-head"><span class="tag" style="background:${color}">${a.num} · ${T(a.title)}</span>
+    <h2 class="display">${T(I18N.projectsIn)}</h2></div><div class="projects">${cards}</div>`;}
+function viewInits(){
+  const a=getAxis(),p=getProject(),color=themeColor(a.theme);
+  const cards=p.initiatives.map((n,idx)=>`<div class="init-card" onclick="go('init',{axis:'${a.id}',project:'${p.id}',init:${idx}})">
+    <div class="init-icon">${n.icon}</div><div class="init-info"><div class="type">${T(n.levier)}</div>
+    <h3>${T(n.titre)}</h3><p>${T(n.accroche)}</p></div><div class="init-arrow">→</div></div>`).join('');
+  const acr=p.acronyme?`<span class="acr-badge">${p.acronyme}</span> `:'';
+  return `<div class="section-head"><span class="tag" style="background:${color}">${T(p.titre)}</span>
+    <h2 class="display">${acr}${T(I18N.initiativesIn)}</h2><p>${T(p.mission)}</p></div><div class="inits">${cards}</div>${qrBlock(p)}`;}
+function qrBlock(p){
+  const has=p.drive&&p.drive.trim()!=='';
+  const id='qr_'+p.id.replace(/[^a-z0-9]/gi,'');
+  setTimeout(()=>{if(has){try{const qr=qrcode(0,'M');qr.addData(p.drive);qr.make();
+    const el=document.getElementById(id);if(el)el.innerHTML=qr.createImgTag(4,0);}catch(e){console.warn('QR',e);}}},30);
+  return `<div class="qr-block ${has?'':'empty'}">
+    <div class="qr-canvas" id="${id}">${has?'':'QR'}</div>
+    <div class="qr-txt"><h4>${T(I18N.qrTitle)}</h4>
+    <p><span class="scan-icn">▣</span> ${T(I18N.qrHint)}</p></div></div>`;}
+function viewDetail(){
+  const a=getAxis(),p=getProject(),n=getInit(),color=themeColor(a.theme);
+  let declic="";
+  if(n.declicType==="number"&&n.chiffre)declic=`<div class="declic is-num" style="background:${color}">
+    <div class="big">${n.chiffre}</div><div class="num-lbl">${T(n.legchiffre)}</div></div>`;
+  else if(n.declicType==="quote"&&T(n.citation))declic=`<div class="declic is-quote" style="background:${color}">
+    <div class="quote">« ${T(n.citation)} »</div>${n.auteur?`<div class="who">${n.auteur}${T(n.roleauteur)?' · <span class="role">'+T(n.roleauteur)+'</span>':''}</div>`:''}</div>`;
+  let video="";
+  if(n.video&&n.video.trim()!=="")video=`<div class="video-wrap" onclick="openVideo('${n.video}')">
+    <div class="vthumb"></div><div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+    ${T(n.videoCap)?'<div class="video-cap">'+T(n.videoCap)+'</div>':''}`;
+  const heroSrc=(n.img&&n.img.trim()!=='')?n.img:(p.img||'');
+  const heroImg=heroSrc?`<div class="hero-bg" style="background-image:url('${heroSrc}')"></div>`:`<div class="hero-bg empty"></div>`;
+  let contact="";
+  if(n.contactNom){
+    const initials=n.contactNom.split(' ').map(w=>w[0]).slice(0,2).join('');
+    contact=`<div class="contact"><div class="cavatar">${initials}</div>
+      <div class="cinfo"><div class="cname">${n.contactNom}</div>${T(n.contactRole)?'<div class="crole">'+T(n.contactRole)+'</div>':''}
+      ${n.contactMail?'<a class="cmail" href="mailto:'+n.contactMail+'">'+n.contactMail+'</a>':''}</div></div>`;
+  }
+  const facts=[
+    [T(I18N.lever),T(n.levier)],[T(I18N.region),T(n.region)],
+    [T(I18N.period),p.periode],[T(I18N.partner),p.partenaire],[T(I18N.statusL),T(n.statut)]
+  ].filter(f=>f[1]).map(f=>`<div class="fact-row"><span class="k">${f[0]}</span><span class="v">${f[1]}</span></div>`).join('');
+  return `<div class="detail"><div class="detail-hero">${heroImg}
+    <div class="hero-content">${p.acronyme?'<span class="acr-badge">'+p.acronyme+'</span><br>':''}<span class="type-badge">${T(n.levier)}</span><h2 class="display">${T(n.titre)}</h2></div></div>
+    <div class="detail-grid"><div class="detail-main">
+      ${T(n.defi)?'<div class="qblock"><div class="qlabel"><span class="dot"></span>'+T(I18N.challenge)+'</div><p>'+T(n.defi)+'</p></div>':''}
+      ${T(n.reponse)?'<div class="qblock"><div class="qlabel"><span class="dot"></span>'+T(I18N.response)+'</div><p>'+T(n.reponse)+'</p></div>':''}
+      ${declic}${video}</div>
+    <div class="detail-side">
+      <div class="fact-box"><h5>${T(I18N.keyFacts)}</h5>${facts}</div>
+      ${T(n.transposable)||n.contactNom?`<div class="transpo"><div class="tlabel">⇄ ${T(I18N.transpoLabel)}</div>
+        ${T(n.transposable)?'<div class="ttext">'+T(n.transposable)+'</div>':''}<div class="cta">${T(I18N.contactCta)}</div>${contact}</div>`:''}
+    </div></div></div>`;}
+const modal=document.getElementById('videoModal'),modalClose=document.getElementById('modalClose'),placeholder=document.getElementById('videoPlaceholder');
+function openVideo(src){modal.classList.add('open');const ex=modal.querySelector('video');if(ex)ex.remove();
+  const v=document.createElement('video');v.src=src;v.controls=true;v.autoplay=true;
+  v.onerror=()=>{v.remove();placeholder.style.display='block';};v.onloadeddata=()=>{placeholder.style.display='none';};
+  placeholder.style.display='block';modal.insertBefore(v,placeholder);resetIdle();}
+modalClose.onclick=()=>{modal.classList.remove('open');const v=modal.querySelector('video');if(v)v.pause();};
+let idleSeconds=0,idleCountdown;const IDLE_LIMIT=90,fill=document.getElementById('idleFill');
+function resetIdle(){idleSeconds=0;fill.style.width='0%';clearInterval(idleCountdown);
+  idleCountdown=setInterval(()=>{idleSeconds++;fill.style.width=(idleSeconds/IDLE_LIMIT*100)+'%';
+    if(idleSeconds>=IDLE_LIMIT){clearInterval(idleCountdown);modal.classList.remove('open');setLang('fr');go('home');}},1000);}
+['click','touchstart','scroll','mousemove'].forEach(e=>document.addEventListener(e,resetIdle,{passive:true}));
+
+function goBack(){
+  if(nav.init!==null&&nav.init!==undefined){go('project',{axis:nav.axis,project:nav.project});}
+  else if(nav.project){go('axis',{axis:nav.axis});}
+  else if(nav.axis){go('home');}
+}
+function updateFab(){const f=document.getElementById('backFab');
+  if(!f)return; f.classList.toggle('show', nav.axis!==null);}
+document.getElementById('backFab').onclick=goBack;
+document.querySelectorAll('.lang-switch button').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
+setLang('fr');go('home');
+</script>
+</body>
+</html>
