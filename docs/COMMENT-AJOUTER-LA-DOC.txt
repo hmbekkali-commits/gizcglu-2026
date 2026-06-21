@@ -1,0 +1,17 @@
+DOSSIER "docs" — DOCUMENTATION PAR PROJET
+==========================================
+Chaque sous-dossier (ex. docs/eau-circulaire/) contient une page index.html
+DÉJÀ PRÊTE avec les vrais titres de tes documents.
+
+CE QU'IL TE RESTE A FAIRE :
+  Dépose tes PDF dans le bon dossier de projet, en les nommant
+  EXACTEMENT comme indiqué dans le fichier "liste-noms-docs.txt".
+
+  Exemple pour Eau circulaire (docs/eau-circulaire/) :
+    eau-circulaire-vision-tanger-2050.pdf
+    eau-circulaire-vision-marrakech-2050.pdf
+    ... etc.
+
+Les titres affichés sont déjà bons, tu ne touches à rien dans le HTML.
+Si un PDF manque, son bouton donnera une erreur 404 au clic : mieux vaut
+déposer tous les fichiers listés.
