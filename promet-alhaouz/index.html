@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentation — PROMET-AlHaouz | GIZ Maroc</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap');
+  :root{--giz-red:#C80F0F;--giz-grey:#6F6F6F;--ink:#111;--line:rgba(0,0,0,.12);}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Open Sans',Arial,sans-serif;background:#fff;color:var(--ink);min-height:100vh;padding:30px 18px 60px;}
+  .wrap{max-width:600px;margin:0 auto;}
+  .kicker{display:inline-block;background:var(--giz-red);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:5px;margin-bottom:16px;}
+  h1{font-size:24px;font-weight:800;line-height:1.22;letter-spacing:-.01em;margin-bottom:8px;}
+  h1 .acr{display:block;font-size:13px;font-weight:700;color:var(--giz-grey);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;}
+  .subs{font-size:14px;color:var(--giz-grey);line-height:1.5;margin-bottom:6px;}
+  .subs.ar{direction:rtl;font-family:'IBM Plex Sans Arabic',sans-serif;}
+  .intro{font-size:14px;color:var(--giz-grey);margin:22px 0 18px;line-height:1.5;}
+  .doc-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .doc{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;text-decoration:none;color:var(--ink);transition:transform .15s,box-shadow .15s;}
+  .doc:active{transform:scale(.98);}
+  .doc:hover{box-shadow:0 6px 20px -8px rgba(0,0,0,.22);}
+  .doc .ico{flex-shrink:0;width:46px;height:46px;border-radius:50%;background:var(--giz-red);display:grid;place-items:center;}
+  .doc .ico svg{width:22px;height:22px;fill:#fff;}
+  .doc .label{flex:1;font-size:16px;font-weight:600;line-height:1.3;}
+  .doc .meta{display:block;font-size:12px;color:var(--giz-grey);font-weight:400;margin-top:3px;}
+  .doc .dl{flex-shrink:0;color:var(--giz-red);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+  .foot{margin-top:40px;font-size:11px;color:var(--giz-grey);text-align:center;line-height:1.6;}
+  @media(max-width:420px){h1{font-size:21px;}.doc .label{font-size:15px;}.doc .dl{display:none;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="kicker">Documentation du projet</span>
+  <h1><span class="acr">PROMET-AlHaouz</span>Relance économique post-séisme</h1>
+  <div class="subs">Post earthquake economic recovery</div>
+  <div class="subs ar">الإنعاش الاقتصادي بعد الزلزال</div>
+  <p class="intro">Téléchargez les documents du projet. Cliquez sur une icône pour ouvrir ou enregistrer le fichier.</p>
+  <ul class="doc-list">
+    <li><a class="doc" href="promet-alhaouz-factsheet-promet-alhaouz.pdf" download>
+      <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg></span>
+      <span class="label">Factsheet PROMET-AlHaouz<span class="meta">PDF</span></span>
+      <span class="dl">Télécharger</span>
+    </a></li>
+  </ul>
+  <p class="foot">Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ) GmbH<br>Coopération maroco-allemande · CGLU Tanger 2026</p>
+</div>
+</body>
+</html>
